@@ -11,6 +11,9 @@
 class Platform: public IObject
 {
 private:
+    int windowWidth;
+    int windowHeight;
+
     Sprite *sprite = nullptr;
 
     float x_coordinate = 0;
@@ -19,7 +22,7 @@ private:
     bool isLeft = false;
 
 public:
-    Platform();
+    Platform(int width, int height);
     ~Platform();
 
     void render() override;

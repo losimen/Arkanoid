@@ -1,7 +1,8 @@
-#include "MyFramework.h"
+#include "Game.h"
 
 
 int main()
 {
-    return run(new MyFramework);
+    Game *game = new Game(800, 600);
+    return run(game);
 }

@@ -16,7 +16,7 @@ void Platform::render()
         x_coordinate = (x_coordinate - 0.6);
     }
 
-    drawSprite(sprite, x_coordinate, 450 - (450 * 15) / 100);
+    drawSprite(sprite, x_coordinate, windowHeight - (windowHeight * 15) / 100);
 }
 
 void Platform::onKeyPressed(FRKey k)
@@ -43,8 +43,11 @@ void Platform::onKeyReleased(FRKey k)
     }
 }
 
-Platform::Platform()
+Platform::Platform(int width, int height)
 {
+    this->windowWidth = width;
+    this->windowHeight = height;
+
     if (sprite == nullptr)
     {
         sprite = createSprite("data/50-Breakout-Tiles.png");

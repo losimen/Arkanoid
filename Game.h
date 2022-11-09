@@ -9,11 +9,15 @@
 #include "Platform.h"
 
 
-class MyFramework : public Framework {
+class Game : public Framework {
 private:
-    Platform *platform = nullptr;
+    Platform *platform;
+    int width;
+    int height;
 
 public:
+    Game(int width, int height);
+
     void PreInit(int& width, int& height, bool& fullscreen) override;
     bool Init() override;
 
