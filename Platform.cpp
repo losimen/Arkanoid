@@ -3,7 +3,7 @@
 //
 
 #include "Platform.h"
-#include <iostream>
+
 
 void Platform::render()
 {
@@ -49,6 +49,7 @@ void Platform::render()
     drawSprite(sprite, xCoordinate, windowHeight - (windowHeight * 15) / 100);
 }
 
+
 void Platform::onKeyPressed(FRKey k)
 {
     if (k == FRKey::RIGHT)
@@ -61,6 +62,7 @@ void Platform::onKeyPressed(FRKey k)
     }
 }
 
+
 void Platform::onKeyReleased(FRKey k)
 {
     if (k == FRKey::LEFT)
@@ -72,6 +74,7 @@ void Platform::onKeyReleased(FRKey k)
         isRight = false;
     }
 }
+
 
 Platform::Platform(int width, int height): windowLeftBorder(0), windowRightBorder(width - 90)
 {

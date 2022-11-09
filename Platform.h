@@ -33,6 +33,7 @@ private:
 
     bool isRight = false;
     bool isLeft = false;
+
 public:
     Platform(int width, int height);
     ~Platform();
