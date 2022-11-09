@@ -37,6 +37,7 @@ private:
     bool isRight;
     bool isLeft;
 
+    int speed;
 public:
     Platform(int width, int height);
     ~Platform();

@@ -28,17 +28,17 @@ void Platform::render()
 
     if (isRight)
     {
-        xCoordinate = 0.6 + xCoordinate;
+        xCoordinate = xCoordinate + speed;
 
         if (xCoordinate > windowRightBorder)
         {
-            xCoordinate = windowWidth - 90;
+            xCoordinate = windowWidth - spriteWidth;
         }
     }
 
     if (isLeft)
     {
-        xCoordinate = xCoordinate - 0.6;
+        xCoordinate = xCoordinate - speed;
 
         if (xCoordinate < windowLeftBorder)
         {
@@ -46,6 +46,7 @@ void Platform::render()
         }
     }
 
+    // 15% of the window width
     drawSprite(sprite, xCoordinate, windowHeight - (windowHeight * 15) / 100);
 }
 
@@ -81,6 +82,7 @@ Platform::Platform(int width, int height): windowLeftBorder(0), windowRightBorde
     this->windowWidth = width;
     this->windowHeight = height;
 
+    speed = 4;
     spriteWidth = 90;
     spriteHeight = 25;
 

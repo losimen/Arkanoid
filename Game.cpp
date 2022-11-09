@@ -37,7 +37,9 @@ void Game::onMouseMove(int x, int y, int xrelative, int yrelative)
 
 bool Game::Tick()
 {
+    drawTestBackground();
     platform->render();
+
     return false;
 }
 
