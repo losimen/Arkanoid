@@ -6,15 +6,14 @@
 #define SDL_MYFRAMEWORK_H
 
 #include "Framework.h"
-#include <iostream>
-
-/* Test Framework realization */
+#include "Platform.h"
 
 
 class MyFramework : public Framework {
+private:
+    Platform *platform = nullptr;
 
 public:
-
     void PreInit(int& width, int& height, bool& fullscreen) override;
     bool Init() override;
 
