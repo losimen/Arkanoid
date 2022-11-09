@@ -81,14 +81,22 @@ Platform::Platform(int width, int height): windowLeftBorder(0), windowRightBorde
     this->windowWidth = width;
     this->windowHeight = height;
 
+    spriteWidth = 90;
+    spriteHeight = 25;
+
+    isLeft = false;
+    isRight = false;
+
+    xCoordinate = (width-spriteWidth) / 2;
+
     sprite1 = createSprite("data/50-Breakout-Tiles.png");
-    setSpriteSize(sprite1, 90, 25);
+    setSpriteSize(sprite1, spriteWidth, spriteHeight);
 
     sprite2 = createSprite("data/51-Breakout-Tiles.png");
-    setSpriteSize(sprite2, 90, 25);
+    setSpriteSize(sprite2, spriteWidth, spriteHeight);
 
     sprite3 = createSprite("data/52-Breakout-Tiles.png");
-    setSpriteSize(sprite3, 90, 25);
+    setSpriteSize(sprite3, spriteWidth, spriteHeight);
 
     sprite = sprite1;
 

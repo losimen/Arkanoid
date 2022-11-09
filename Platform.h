@@ -27,12 +27,15 @@ private:
     bool isSprite3;
 
     // current sprite
-    Sprite *sprite = nullptr;
+    Sprite *sprite;
 
-    float xCoordinate = 0;
+    int spriteWidth;
+    int spriteHeight;
 
-    bool isRight = false;
-    bool isLeft = false;
+    float xCoordinate;
+
+    bool isRight;
+    bool isLeft;
 
 public:
     Platform(int width, int height);
