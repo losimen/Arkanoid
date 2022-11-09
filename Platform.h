@@ -11,16 +11,28 @@
 class Platform: public IObject
 {
 private:
+    const int windowLeftBorder;
+    const int windowRightBorder;
+
     int windowWidth;
     int windowHeight;
 
+    // animation
+    Sprite *sprite1;
+    Sprite *sprite2;
+    Sprite *sprite3;
+
+    bool isSprite1;
+    bool isSprite2;
+    bool isSprite3;
+
+    // current sprite
     Sprite *sprite = nullptr;
 
-    float x_coordinate = 0;
+    float xCoordinate = 0;
 
     bool isRight = false;
     bool isLeft = false;
-
 public:
     Platform(int width, int height);
     ~Platform();

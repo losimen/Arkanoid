@@ -3,20 +3,50 @@
 //
 
 #include "Platform.h"
+#include <iostream>
 
 void Platform::render()
 {
+    if (isSprite1)
+    {
+        sprite = sprite1;
+        isSprite1 = false;
+        isSprite2 = true;
+    }
+    else if (isSprite2)
+    {
+        sprite = sprite2;
+        isSprite2 = false;
+        isSprite3 = true;
+    }
+    else if (isSprite3)
+    {
+        sprite = sprite3;
+        isSprite3 = false;
+        isSprite1 = true;
+    }
+
     if (isRight)
     {
-        x_coordinate = (0.6 + x_coordinate);
+        xCoordinate = 0.6 + xCoordinate;
+
+        if (xCoordinate > windowRightBorder)
+        {
+            xCoordinate = windowWidth - 90;
+        }
     }
 
     if (isLeft)
     {
-        x_coordinate = (x_coordinate - 0.6);
+        xCoordinate = xCoordinate - 0.6;
+
+        if (xCoordinate < windowLeftBorder)
+        {
+            xCoordinate = 0;
+        }
     }
 
-    drawSprite(sprite, x_coordinate, windowHeight - (windowHeight * 15) / 100);
+    drawSprite(sprite, xCoordinate, windowHeight - (windowHeight * 15) / 100);
 }
 
 void Platform::onKeyPressed(FRKey k)
@@ -43,23 +73,31 @@ void Platform::onKeyReleased(FRKey k)
     }
 }
 
-Platform::Platform(int width, int height)
+Platform::Platform(int width, int height): windowLeftBorder(0), windowRightBorder(width - 90)
 {
     this->windowWidth = width;
     this->windowHeight = height;
 
-    if (sprite == nullptr)
-    {
-        sprite = createSprite("data/50-Breakout-Tiles.png");
-        setSpriteSize(sprite, 90, 25);
-    }
+    sprite1 = createSprite("data/50-Breakout-Tiles.png");
+    setSpriteSize(sprite1, 90, 25);
+
+    sprite2 = createSprite("data/51-Breakout-Tiles.png");
+    setSpriteSize(sprite2, 90, 25);
+
+    sprite3 = createSprite("data/52-Breakout-Tiles.png");
+    setSpriteSize(sprite3, 90, 25);
+
+    sprite = sprite1;
+
+    isSprite1 = true;
+    isSprite2 = false;
+    isSprite3 = false;
 }
 
 
 Platform::~Platform()
 {
-    if (sprite != nullptr)
-    {
-        destroySprite(sprite);
-    }
+    destroySprite(sprite1);
+    destroySprite(sprite2);
+    destroySprite(sprite3);
 }
