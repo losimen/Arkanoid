@@ -7,11 +7,15 @@
 
 #include "Framework.h"
 #include "Platform.h"
+#include "Mouse.h"
 
 
-class Game : public Framework {
+class Game : public Framework
+{
 private:
     Platform *platform;
+    Mouse *mouse;
+
     int width;
     int height;
 

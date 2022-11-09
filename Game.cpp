@@ -31,7 +31,7 @@ void Game::onMouseButtonClick(FRMouseButton button, bool isReleased)
 
 void Game::onMouseMove(int x, int y, int xrelative, int yrelative)
 {
-
+    mouse->onMouseMove(x, y, xrelative, yrelative);
 }
 
 
@@ -39,6 +39,7 @@ bool Game::Tick()
 {
     drawTestBackground();
     platform->render();
+    mouse->render();
 
     return false;
 }
@@ -53,6 +54,7 @@ void Game::Close()
 bool Game::Init()
 {
     platform = new Platform(width, height);
+    mouse = new Mouse();
 
     return true;
 }
