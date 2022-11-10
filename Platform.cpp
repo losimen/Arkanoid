@@ -7,23 +7,20 @@
 
 void Platform::render()
 {
-    if (isSprite1)
+    switch(currentSprite)
     {
-        sprite = sprite1;
-        isSprite1 = false;
-        isSprite2 = true;
-    }
-    else if (isSprite2)
-    {
-        sprite = sprite2;
-        isSprite2 = false;
-        isSprite3 = true;
-    }
-    else if (isSprite3)
-    {
-        sprite = sprite3;
-        isSprite3 = false;
-        isSprite1 = true;
+        case PlatformSprite::SPRITE1:
+            sprite = sprite1;
+            currentSprite = PlatformSprite::SPRITE2;
+            break;
+        case PlatformSprite::SPRITE2:
+            sprite = sprite2;
+            currentSprite = PlatformSprite::SPRITE3;
+            break;
+        case PlatformSprite::SPRITE3:
+            sprite = sprite3;
+            currentSprite = PlatformSprite::SPRITE1;
+            break;
     }
 
     if (isRight)
@@ -101,10 +98,7 @@ Platform::Platform(int width, int height): windowLeftBorder(0), windowRightBorde
     setSpriteSize(sprite3, spriteWidth, spriteHeight);
 
     sprite = sprite1;
-
-    isSprite1 = true;
-    isSprite2 = false;
-    isSprite3 = false;
+    currentSprite = PlatformSprite::SPRITE1;
 }
 
 

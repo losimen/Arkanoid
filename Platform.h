@@ -11,6 +11,7 @@
 class Platform: public IObject
 {
 private:
+
     const int windowLeftBorder;
     const int windowRightBorder;
 
@@ -22,9 +23,12 @@ private:
     Sprite *sprite2;
     Sprite *sprite3;
 
-    bool isSprite1;
-    bool isSprite2;
-    bool isSprite3;
+    enum class PlatformSprite
+    {
+        SPRITE1,
+        SPRITE2,
+        SPRITE3
+    } currentSprite;
 
     // current sprite
     Sprite *sprite;
@@ -38,6 +42,8 @@ private:
     bool isLeft;
 
     int speed;
+
+
 public:
     Platform(int width, int height);
     ~Platform();
