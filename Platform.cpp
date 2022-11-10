@@ -73,9 +73,10 @@ void Platform::onKeyReleased(FRKey k)
 }
 
 
-Platform::Platform(int x, int y, int width, int height, int windowWidth, int windowHeight): windowLeftBorder(0),
-                                                       windowRightBorder(windowWidth - width),
-                                                       IObject(x, y, width, height, windowWidth, windowHeight)
+Platform::Platform(int x, int y, int width, int height, int windowWidth, int windowHeight):
+                                                       IObject(x, y, width, height, windowWidth, windowHeight),
+                                                       windowLeftBorder(0),
+                                                       windowRightBorder(windowWidth - width)
 
 {
     speed = 4;

@@ -40,6 +40,9 @@ bool Game::Tick()
     drawTestBackground();
     platform->render();
     mouse->render();
+
+    ball->setPlatformPosition(platform->getX(), platform->getY());
+    ball->setPlatformSize(platform->getWidth(), platform->getHeight());
     ball->render();
 
     return false;
@@ -49,6 +52,8 @@ bool Game::Tick()
 void Game::Close()
 {
     delete platform;
+    delete mouse;
+    delete ball;
 }
 
 
