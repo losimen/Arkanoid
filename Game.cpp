@@ -28,6 +28,7 @@ void Game::onMouseButtonClick(FRMouseButton button, bool isReleased)
     if (!ball->getIsReleased())
     {
         ball->setIsReleased(true);
+        ball->setBallDestination(mouse->getX(), mouse->getY());
         destroySprite(mouse->getSprite());
     }
 }
@@ -35,7 +36,10 @@ void Game::onMouseButtonClick(FRMouseButton button, bool isReleased)
 
 void Game::onMouseMove(int x, int y, int xRelative, int yRelative)
 {
-    mouse->onMouseMove(x, y, xRelative, yRelative);
+    if (!ball->getIsReleased())
+    {
+        mouse->onMouseMove(x, y, xRelative, yRelative);
+    }
 }
 
 

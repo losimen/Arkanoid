@@ -21,29 +21,35 @@ Sprite *IObject::getSprite() const {
 }
 
 
-int IObject::getX() const {
+int IObject::getX() const
+{
     return x;
 }
 
 
-int IObject::getY() const {
+int IObject::getY() const
+{
     return y;
 }
 
 
-int IObject::getWidth() const {
+int IObject::getWidth() const
+{
     return width;
 }
 
 
-int IObject::getHeight() const {
+int IObject::getHeight() const
+{
     return height;
 }
 
+
 IObject::~IObject()
 {
-    if (sprite != nullptr)
-    {
-        destroySprite(sprite);
-    }
+    // TODO: memory leak???
+//    if (sprite != nullptr)
+//    {
+//        destroySprite(sprite);
+//    }
 }
