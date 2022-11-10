@@ -10,25 +10,30 @@ void Ball::render()
 {
     if (isReleased)
     {
+        // LEFT EDGE
         if (x < 0)
         {
-            velocityX = -velocityX;
+            speedX = -speedX;
         }
+        // TOP EDGE
         if (y < 0)
         {
-            velocityY = -velocityY;
+            speedX = -speedX;
         }
+        // RIGHT EDGE
         if (x > windowWidth - width)
         {
-            velocityX = -velocityX;
+            speedX = -speedX;
         }
+        // BOTTOM EDGE
         if (y > windowHeight - height)
         {
-            velocityY = -velocityY;
+            speedX = -speedX;
         }
 
-        x = x - velocityX;
-        y = y - velocityY;
+       // std::cout << "x: " << x << " y: " << y << std::endl;
+        x = x - speedX;
+        y = k * x + b;
     }
     else
     {
@@ -54,7 +59,7 @@ Ball::Ball(int x, int y, int width, int height, int windowWidth, int windowHeigh
     platformWidth = 0;
     platformHeight = 0;
 
-    velocityX = 1;
+    speedX = 1;
     velocityY = 1;
 
     setSpriteSize(sprite, width, height);
@@ -104,32 +109,19 @@ void Ball::setBallDestination(int x, int y)
     // we will get linear function and (inc/dec)rementing this->x
     // we will know this->y
     // --------------------------------------------------------------------------------------------------------
-    // Modifying formula:
-    //      a) x1, y1 |=> x, y
-    //      b) x2, y2 |=> fX, fY
-    //      c) x,  y  |=> this->x, this->y
-    //      d) (y2-y1)/(x2-x1) |=> fCof1
-    // y = fCof1 * (x - x1) + y1
-    // y = fCof1 * x - fCof1*x1 + y1
-    // y = fCof1 * x + fK
 
-//    double k = (y2 - y1)/(x2 - x1);
-//    double b = (x2*y1 - x1*y2)/(x2 - x1);
-//    std::cout << "x: " << x << " y: " << y << std::endl;
-//    std::cout << "this->x: " << this->x << " this->y: " << this->y << std::endl;
-//
-//    double y2 = this->y;
-//    double y1 = y;
-//
-//    double x2 = this->x;
-//    double x1 = x;
-//
-//    k = (y2 - y1)/(x2 - x1);
-//    b = (x2*y1 - x1*y2)/(x2 - x1);
-//
-//    std::cout << "y = " << k << " * x" << " + " << b << std::endl;
-//    fCof1 = (y-this->y)/(x-this->x);
-//    fK = -fCof1*x + y;
+    double y2 = this->y;
+    double y1 = y;
 
+    double x2 = this->x;
+    double x1 = x;
+
+    k = (y2 - y1)/(x2 - x1);
+    b = (x2*y1 - x1*y2)/(x2 - x1);
+
+    if (k < 0)
+        speedX = -1;
+
+    std::cout << "y = " << k << "*x + " << b << std::endl;
 
 }
