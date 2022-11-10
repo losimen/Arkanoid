@@ -18,7 +18,6 @@ void Mouse::onMouseMove(int _x, int _y, int xRelative, int yRelative)
 
 Mouse::~Mouse()
 {
-    destroySprite(sprite);
 }
 
 Mouse::Mouse(int x, int y, int width, int height, int windowWidth, int windowHeight) : IObject(x, y, width, height,

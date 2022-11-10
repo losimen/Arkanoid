@@ -25,7 +25,11 @@ void Game::onKeyPressed(FRKey k)
 
 void Game::onMouseButtonClick(FRMouseButton button, bool isReleased)
 {
-
+    if (!ball->getIsReleased())
+    {
+        ball->setIsReleased(true);
+        destroySprite(mouse->getSprite());
+    }
 }
 
 
@@ -39,7 +43,11 @@ bool Game::Tick()
 {
     drawTestBackground();
     platform->render();
-    mouse->render();
+
+    if (!ball->getIsReleased())
+    {
+        mouse->render();
+    }
 
     ball->setPlatformPosition(platform->getX(), platform->getY());
     ball->setPlatformSize(platform->getWidth(), platform->getHeight());

@@ -44,8 +44,26 @@ void Ball::setPlatformPosition(int x, int y)
     platformY = y;
 }
 
+
 void Ball::setPlatformSize(int width, int height)
 {
     platformWidth = width;
     platformHeight = height;
+}
+
+
+bool Ball::getIsReleased() const
+{
+    return isReleased;
+}
+
+void Ball::setIsReleased(bool isReleased)
+{
+    this->isReleased = isReleased;
+}
+
+
+Ball::~Ball()
+{
+
 }

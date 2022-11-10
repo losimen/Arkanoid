@@ -24,11 +24,15 @@ private:
 
 public:
     Ball(int x, int y, int width, int height, int speed, int direction);
+    ~Ball();
 
     void setPlatformPosition(int x, int y);
     void setPlatformSize(int width, int height);
 
     void render() override;
+
+    bool getIsReleased() const;
+    void setIsReleased(bool isReleased);
 };
 
 

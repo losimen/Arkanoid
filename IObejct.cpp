@@ -4,6 +4,7 @@
 
 #include "IObject.h"
 
+
 IObject::IObject(int x, int y, int width, int height, int windowWidth, int windowHeight)
 {
     this->x = x;
@@ -37,4 +38,12 @@ int IObject::getWidth() const {
 
 int IObject::getHeight() const {
     return height;
+}
+
+IObject::~IObject()
+{
+    if (sprite != nullptr)
+    {
+        destroySprite(sprite);
+    }
 }

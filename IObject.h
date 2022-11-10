@@ -23,6 +23,7 @@ protected:
 
 public:
     IObject(int x, int y, int width, int height, int windowWidth, int windowHeight);
+    ~IObject();
 
     virtual void render() = 0;
 

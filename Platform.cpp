@@ -104,7 +104,18 @@ Platform::Platform(int x, int y, int width, int height, int windowWidth, int win
 
 Platform::~Platform()
 {
-    destroySprite(sprite1);
-    destroySprite(sprite2);
-    destroySprite(sprite3);
+    sprite = nullptr;
+
+    if (sprite1 != nullptr)
+    {
+        destroySprite(sprite1);
+    }
+    if (sprite2 != nullptr)
+    {
+        destroySprite(sprite2);
+    }
+    if (sprite3 != nullptr)
+    {
+        destroySprite(sprite3);
+    }
 }
