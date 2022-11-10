@@ -15,7 +15,7 @@ private:
     int direction;
 
 public:
-    Ball();
+    Ball(int x, int y, int width, int height, int speed, int direction);
     void render() override;
 };
 

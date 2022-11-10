@@ -4,17 +4,15 @@
 
 #include "Ball.h"
 
+
 void Ball::render()
 {
-
+    drawSprite(sprite, x, y);
 }
 
-Ball::Ball(): IObject(0, 0, 24, 24)
+Ball::Ball(int x, int y, int width, int height, int windowWidth, int windowHeight) :
+                                                IObject(x, y, width, height, windowWidth, windowHeight)
 {
-    sprite = createSprite("data/59-Breakout-Tiles.png");
-
+    sprite = createSprite("data/62-Breakout-Tiles.png");
     setSpriteSize(sprite, width, height);
-
-    x = 0;
-    y = 0;
 }

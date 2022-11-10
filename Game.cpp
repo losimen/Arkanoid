@@ -40,6 +40,7 @@ bool Game::Tick()
     drawTestBackground();
     platform->render();
     mouse->render();
+    ball->render();
 
     return false;
 }
@@ -53,8 +54,9 @@ void Game::Close()
 
 bool Game::Init()
 {
-    platform = new Platform(width, height);
-    mouse = new Mouse();
+    platform = new Platform(0, 0, 90, 25, width, height);
+    mouse = new Mouse(0, 0, 24, 24, width, height);
+    ball = new Ball(0, 0, 24, 24, width, height);
 
     return true;
 }

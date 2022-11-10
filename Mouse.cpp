@@ -15,18 +15,16 @@ void Mouse::onMouseMove(int _x, int _y, int xRelative, int yRelative)
     y = _y;
 }
 
-Mouse::Mouse(): IObject(0, 0, 24, 24)
-{
-    sprite = createSprite("data/59-Breakout-Tiles.png");
-
-    setSpriteSize(sprite, width, height);
-
-    x = 0;
-    y = 0;
-}
-
 
 Mouse::~Mouse()
 {
     destroySprite(sprite);
+}
+
+Mouse::Mouse(int x, int y, int width, int height, int windowWidth, int windowHeight) : IObject(x, y, width, height,
+                                                                                               windowWidth,
+                                                                                               windowHeight)
+{
+    sprite = createSprite("data/59-Breakout-Tiles.png");
+    setSpriteSize(sprite, width, height);
 }

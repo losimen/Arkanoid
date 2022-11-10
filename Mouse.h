@@ -11,7 +11,7 @@
 class Mouse: public IObject
 {
 public:
-    Mouse();
+    Mouse(int x, int y, int width, int height, int windowWidth, int windowHeight);
     ~Mouse();
 
     void render() override;

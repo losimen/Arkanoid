@@ -14,9 +14,6 @@ private:
     const int windowLeftBorder;
     const int windowRightBorder;
 
-    int windowWidth;
-    int windowHeight;
-
     // animation
     Sprite *sprite1;
     Sprite *sprite2;
@@ -35,7 +32,7 @@ private:
     int speed;
 
 public:
-    Platform(int windowWidth, int windowHeight);
+    Platform(int x, int y, int width, int height, int windowWidth, int windowHeight);
     ~Platform();
 
     void render() override;

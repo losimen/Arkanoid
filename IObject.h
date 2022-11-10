@@ -7,7 +7,6 @@
 
 #include "Framework.h"
 
-
 class IObject
 {
 protected:
@@ -19,10 +18,21 @@ protected:
     int width;
     int height;
 
+    int windowWidth;
+    int windowHeight;
+
 public:
-    IObject(int _x, int _y, int _width, int _height);
+    IObject(int x, int y, int width, int height, int windowWidth, int windowHeight);
 
     virtual void render() = 0;
+
+    Sprite *getSprite() const;
+
+    int getX() const;
+    int getY() const;
+
+    int getWidth() const;
+    int getHeight() const;
 };
 
 

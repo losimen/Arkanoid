@@ -43,7 +43,6 @@ void Platform::render()
         }
     }
 
-    // 15% of the window width
     drawSprite(sprite, x, y);
 }
 
@@ -74,21 +73,19 @@ void Platform::onKeyReleased(FRKey k)
 }
 
 
-Platform::Platform(int windowWidth, int windowHeight): windowLeftBorder(0),
-                                                       windowRightBorder(windowWidth - 90),
-                                                       IObject(0, 0, 90, 25)
+Platform::Platform(int x, int y, int width, int height, int windowWidth, int windowHeight): windowLeftBorder(0),
+                                                       windowRightBorder(windowWidth - width),
+                                                       IObject(x, y, width, height, windowWidth, windowHeight)
 
 {
-    this->windowWidth = windowWidth;
-    this->windowHeight = windowHeight;
-
     speed = 4;
 
     isLeft = false;
     isRight = false;
 
-    x = (windowWidth - width) / 2;
-    y = windowHeight - (windowHeight * 15) / 100;
+    this->x = (windowWidth - width) / 2;
+    // 15% of the window height
+    this->y = windowHeight - (windowHeight * 15) / 100;
 
     sprite1 = createSprite("data/50-Breakout-Tiles.png");
     setSpriteSize(sprite1, width, height);

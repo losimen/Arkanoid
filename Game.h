@@ -16,6 +16,7 @@ class Game : public Framework
 private:
     Platform *platform;
     Mouse *mouse;
+    Ball *ball;
 
     int width;
     int height;
