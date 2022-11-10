@@ -10,20 +10,12 @@
 
 class Mouse: public IObject
 {
-private:
-    Sprite *sprite;
-
-    int xCoordinate;
-    int yCoordinate;
-
-    int spriteWidth;
-    int spriteHeight;
 public:
     Mouse();
     ~Mouse();
 
     void render() override;
-    void onMouseMove(int x, int y, int xrelative, int yrelative);
+    void onMouseMove(int x, int y, int xRelative, int yRelative);
 
 };
 

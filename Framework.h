@@ -62,7 +62,7 @@ public:
 	virtual bool Tick() = 0;
 
 	// param: xrel, yrel: The relative motion in the X/Y direction 
-	// param: xCoordinate, y : coordinate, relative to window
+	// param: xMouse, y : coordinate, relative to window
 	virtual void onMouseMove(int x, int y, int xrelative, int yrelative) = 0;
 
 	virtual void onMouseButtonClick(FRMouseButton button, bool isReleased) = 0;

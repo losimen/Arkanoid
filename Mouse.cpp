@@ -6,25 +6,23 @@
 
 void Mouse::render()
 {
-    drawSprite(sprite, xCoordinate-spriteWidth/2, yCoordinate-spriteHeight/2);
+    drawSprite(sprite, x - width / 2, y - height / 2);
 }
 
-void Mouse::onMouseMove(int x, int y, int xrelative, int yrelative)
+void Mouse::onMouseMove(int _x, int _y, int xRelative, int yRelative)
 {
-    xCoordinate = x;
-    yCoordinate = y;
+    x = _x;
+    y = _y;
 }
 
-Mouse::Mouse()
+Mouse::Mouse(): IObject(0, 0, 24, 24)
 {
     sprite = createSprite("data/59-Breakout-Tiles.png");
-    spriteHeight = 24;
-    spriteWidth = 24;
 
-    setSpriteSize(sprite, spriteWidth, spriteHeight);
+    setSpriteSize(sprite, width, height);
 
-    xCoordinate = 0;
-    yCoordinate = 0;
+    x = 0;
+    y = 0;
 }
 
 

@@ -25,26 +25,26 @@ void Platform::render()
 
     if (isRight)
     {
-        xCoordinate = xCoordinate + speed;
+        x = x + speed;
 
-        if (xCoordinate > windowRightBorder)
+        if (x > windowRightBorder)
         {
-            xCoordinate = windowWidth - spriteWidth;
+            x = windowWidth - width;
         }
     }
 
     if (isLeft)
     {
-        xCoordinate = xCoordinate - speed;
+        x = x - speed;
 
-        if (xCoordinate < windowLeftBorder)
+        if (x < windowLeftBorder)
         {
-            xCoordinate = 0;
+            x = 0;
         }
     }
 
     // 15% of the window width
-    drawSprite(sprite, xCoordinate, windowHeight - (windowHeight * 15) / 100);
+    drawSprite(sprite, x, y);
 }
 
 
@@ -74,28 +74,30 @@ void Platform::onKeyReleased(FRKey k)
 }
 
 
-Platform::Platform(int width, int height): windowLeftBorder(0), windowRightBorder(width - 90)
+Platform::Platform(int windowWidth, int windowHeight): windowLeftBorder(0),
+                                                       windowRightBorder(windowWidth - 90),
+                                                       IObject(0, 0, 90, 25)
+
 {
-    this->windowWidth = width;
-    this->windowHeight = height;
+    this->windowWidth = windowWidth;
+    this->windowHeight = windowHeight;
 
     speed = 4;
-    spriteWidth = 90;
-    spriteHeight = 25;
 
     isLeft = false;
     isRight = false;
 
-    xCoordinate = (width-spriteWidth) / 2;
+    x = (windowWidth - width) / 2;
+    y = windowHeight - (windowHeight * 15) / 100;
 
     sprite1 = createSprite("data/50-Breakout-Tiles.png");
-    setSpriteSize(sprite1, spriteWidth, spriteHeight);
+    setSpriteSize(sprite1, width, height);
 
     sprite2 = createSprite("data/51-Breakout-Tiles.png");
-    setSpriteSize(sprite2, spriteWidth, spriteHeight);
+    setSpriteSize(sprite2, width, height);
 
     sprite3 = createSprite("data/52-Breakout-Tiles.png");
-    setSpriteSize(sprite3, spriteWidth, spriteHeight);
+    setSpriteSize(sprite3, width, height);
 
     sprite = sprite1;
     currentSprite = PlatformSprite::SPRITE1;

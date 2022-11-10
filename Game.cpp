@@ -29,9 +29,9 @@ void Game::onMouseButtonClick(FRMouseButton button, bool isReleased)
 }
 
 
-void Game::onMouseMove(int x, int y, int xrelative, int yrelative)
+void Game::onMouseMove(int x, int y, int xRelative, int yRelative)
 {
-    mouse->onMouseMove(x, y, xrelative, yrelative);
+    mouse->onMouseMove(x, y, xRelative, yRelative);
 }
 
 
@@ -60,13 +60,14 @@ bool Game::Init()
 }
 
 
-void Game::PreInit(int &width, int &height, bool &fullscreen)
+void Game::PreInit(int &_width, int &_height, bool &fullscreen)
 {
-    width = this->width;
-    height = this->height;
+    _width = this->width;
+    _height = this->height;
 
     fullscreen = false;
 }
+
 
 Game::Game(int width, int height)
 {

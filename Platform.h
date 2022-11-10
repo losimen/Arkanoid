@@ -11,7 +11,6 @@
 class Platform: public IObject
 {
 private:
-
     const int windowLeftBorder;
     const int windowRightBorder;
 
@@ -30,22 +29,13 @@ private:
         SPRITE3
     } currentSprite;
 
-    // current sprite
-    Sprite *sprite;
-
-    int spriteWidth;
-    int spriteHeight;
-
-    float xCoordinate;
-
     bool isRight;
     bool isLeft;
 
     int speed;
 
-
 public:
-    Platform(int width, int height);
+    Platform(int windowWidth, int windowHeight);
     ~Platform();
 
     void render() override;

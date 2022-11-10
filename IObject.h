@@ -10,7 +10,18 @@
 
 class IObject
 {
+protected:
+    Sprite *sprite;
+
+    int x;
+    int y;
+
+    int width;
+    int height;
+
 public:
+    IObject(int _x, int _y, int _width, int _height);
+
     virtual void render() = 0;
 };
 
