@@ -10,12 +10,25 @@ void Ball::render()
 {
     if (isReleased)
     {
+        if (x < 0)
+        {
+            velocityX = -velocityX;
+        }
+        if (y < 0)
+        {
+            velocityY = -velocityY;
+        }
+        if (x > windowWidth - width)
+        {
+            velocityX = -velocityX;
+        }
+        if (y > windowHeight - height)
+        {
+            velocityY = -velocityY;
+        }
 
-//        isReleased = true;
-//        x = x - 0.1;
-//        y = k*x + b;
-        x -= 1;
-        y -= 1;
+        x = x - velocityX;
+        y = y - velocityY;
     }
     else
     {
@@ -40,6 +53,9 @@ Ball::Ball(int x, int y, int width, int height, int windowWidth, int windowHeigh
 
     platformWidth = 0;
     platformHeight = 0;
+
+    velocityX = 1;
+    velocityY = 1;
 
     setSpriteSize(sprite, width, height);
 }

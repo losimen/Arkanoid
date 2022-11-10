@@ -18,6 +18,9 @@ private:
     int speed;
     int direction;
 
+    int velocityX;
+    int velocityY;
+
     int platformX;
     int platformY;
 
