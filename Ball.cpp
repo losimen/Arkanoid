@@ -3,45 +3,23 @@
 //
 
 #include "Ball.h"
-#include <iostream>
 
 
 void Ball::render()
 {
     if (isReleased)
     {
-        // LEFT EDGE
-        if (x < 0)
-        {
-            speedX = -speedX;
-        }
-        // TOP EDGE
-        if (y < 0)
-        {
-            speedX = -speedX;
-        }
-        // RIGHT EDGE
-        if (x > windowWidth - width)
-        {
-            speedX = -speedX;
-        }
-        // BOTTOM EDGE
-        if (y > windowHeight - height)
-        {
-            speedX = -speedX;
-        }
-
        // std::cout << "x: " << x << " y: " << y << std::endl;
-        x = x - speedX;
-        y = k * x + b;
+        xB = xB - stepX;
+        yB = yB - stepY;
     }
     else
     {
-        x = platformX + (platformWidth-width) / 2;
-        y = platformY - height;
+        xB = platformX + (platformWidth-width) / 2;
+        yB = platformY - height;
     }
 
-    drawSprite(sprite, x, y);
+    drawSprite( sprite, xB, yB);
 }
 
 
@@ -100,28 +78,25 @@ Ball::~Ball()
 
 void Ball::setBallDestination(int x, int y)
 {
+    // --------------------------------------------------------------------------------------------------------
     // Find ball route by drawing linear function
     // we have 2 points :
-    //    1. x, y - mouse position
+    //    1. x, y - next position of the ball
     //    2. this->x, this->y - current ball position
     // using formula y = ( (y2-y1)/(x2-x1) ) * (x - x1) + y1 (3)
     // https://www.mathros.net.ua/rivnjannja-prjamoi-jaka-prohodyt-cherez-dvi-zadani-tochky.html
     // we will get linear function and (inc/dec)rementing this->x
     // we will know this->y
     // --------------------------------------------------------------------------------------------------------
+    double xMouse = x;
+    double yMouse = y;
 
-    double y2 = this->y;
-    double y1 = y;
+    double xOffset = std::fabs(xMouse - xB);
+    double yOffset = std::fabs(yMouse - yB);
 
-    double x2 = this->x;
-    double x1 = x;
+    double hypotensive = sqrt(pow(xOffset, 2) + pow(yOffset, 2));
 
-    k = (y2 - y1)/(x2 - x1);
-    b = (x2*y1 - x1*y2)/(x2 - x1);
-
-    if (k < 0)
-        speedX = -1;
-
-    std::cout << "y = " << k << "*x + " << b << std::endl;
-
+    stepX = xOffset / hypotensive;
+    stepY = yOffset / hypotensive;
+    // std::cout << "y = " << k << "*x + " << b << std::endl;
 }

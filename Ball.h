@@ -7,7 +7,11 @@
 
 #include "IObject.h"
 
-#include <math.h>
+#include <cmath>
+
+
+#define PI 3.14159265
+#define DEGREES_TO_RADIANS(angle) ((angle) * PI / 180.0)
 
 
 class Ball : public IObject
@@ -28,13 +32,14 @@ private:
     int platformHeight;
 
     // calculation see setBallDestination method for description
-    double fCof1;
-    double fX;
-    double fY;
-    double fK;
-
     double k;
     double b;
+
+    double stepX;
+    double stepY;
+
+    double xB;
+    double yB;
 
 public:
     Ball(int x, int y, int width, int height, int speed, int direction);

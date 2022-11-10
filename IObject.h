@@ -12,8 +12,8 @@ class IObject
 protected:
     Sprite *sprite;
 
-    int x;
-    int y;
+    double x;
+    double y;
 
     int width;
     int height;
@@ -29,8 +29,8 @@ public:
 
     Sprite *getSprite() const;
 
-    int getX() const;
-    int getY() const;
+    double getX() const;
+    double getY() const;
 
     int getWidth() const;
     int getHeight() const;

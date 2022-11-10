@@ -21,13 +21,13 @@ Sprite *IObject::getSprite() const {
 }
 
 
-int IObject::getX() const
+double IObject::getX() const
 {
     return x;
 }
 
 
-int IObject::getY() const
+double IObject::getY() const
 {
     return y;
 }
