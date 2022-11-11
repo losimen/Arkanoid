@@ -31,16 +31,8 @@ private:
     int platformWidth;
     int platformHeight;
 
-    // calculation see setBallDestination method for description
-    double k;
-    double b;
-
     double stepX;
     double stepY;
-
-    double xB;
-    double yB;
-
 public:
     Ball(int x, int y, int width, int height, int speed, int direction);
     ~Ball();

@@ -10,16 +10,16 @@ void Ball::render()
     if (isReleased)
     {
        // std::cout << "x: " << x << " y: " << y << std::endl;
-        xB = xB - stepX;
-        yB = yB - stepY;
+        x = x - stepX;
+        y = y - stepY;
     }
     else
     {
-        xB = platformX + (platformWidth-width) / 2;
-        yB = platformY - height;
+        x = platformX + (platformWidth-width) / 2;
+        y = platformY - height;
     }
 
-    drawSprite( sprite, xB, yB);
+    drawSprite( sprite, x, y);
 }
 
 
@@ -78,21 +78,35 @@ Ball::~Ball()
 
 void Ball::setBallDestination(int x, int y)
 {
-    // --------------------------------------------------------------------------------------------------------
-    // Find ball route by drawing linear function
-    // we have 2 points :
-    //    1. x, y - next position of the ball
-    //    2. this->x, this->y - current ball position
-    // using formula y = ( (y2-y1)/(x2-x1) ) * (x - x1) + y1 (3)
-    // https://www.mathros.net.ua/rivnjannja-prjamoi-jaka-prohodyt-cherez-dvi-zadani-tochky.html
-    // we will get linear function and (inc/dec)rementing this->x
-    // we will know this->y
-    // --------------------------------------------------------------------------------------------------------
+    /*
+      **********DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED
+      DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED***********
+     --------------------------------------------------------------------------------------------------------
+      **********DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED
+      DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED***********
+                     Find ball route by drawing linear function
+                     we have 2 points :
+                        1. x, y - next position of the ball
+                        2. this->x, this->y - current ball position
+                     using formula y = ( (y2-y1)/(x2-x1) ) * (x - x1) + y1 (3)
+                     https://www.mathros.net.ua/rivnjannja-prjamoi-jaka-prohodyt-cherez-dvi-zadani-tochky.html
+                     we will get linear function and (inc/dec)rementing this->x
+                     we will know this->y
+      **********DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED
+      DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED***********
+     --------------------------------------------------------------------------------------------------------
+      **********DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED
+      DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED**********DEPRECATED***********
+
+
+     New algorithm:
+          Description soon...
+    */
     double xMouse = x;
     double yMouse = y;
 
-    double xOffset = std::fabs(xMouse - xB);
-    double yOffset = std::fabs(yMouse - yB);
+    double xOffset = std::fabs(xMouse - this->x);
+    double yOffset = std::fabs(yMouse - this->y);
 
     double hypotensive = sqrt(pow(xOffset, 2) + pow(yOffset, 2));
 
