@@ -145,13 +145,13 @@ void Ball::isBallHitBorder()
 }
 
 
-void Ball::setDirY(int dirY)
+void Ball::setDirY(int _dirY)
 {
-    this->dirY = dirY;
+    this->dirY = _dirY;
 }
 
 
-void Ball::setDirX(int dirX)
+void Ball::setDirX(int _dirX)
 {
-    this->dirX = dirX;
+    this->dirX = _dirX;
 }
