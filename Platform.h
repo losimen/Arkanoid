@@ -29,7 +29,7 @@ private:
     bool isRight;
     bool isLeft;
 
-    int speed;
+    double speed;
 
 public:
     Platform(int x, int y, int width, int height, int windowWidth, int windowHeight);

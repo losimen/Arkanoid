@@ -79,7 +79,7 @@ Platform::Platform(int x, int y, int width, int height, int windowWidth, int win
                                                        windowRightBorder(windowWidth - width)
 
 {
-    speed = 4;
+    speed = 2.5;
 
     isLeft = false;
     isRight = false;

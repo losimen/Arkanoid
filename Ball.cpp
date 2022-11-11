@@ -9,26 +9,14 @@ void Ball::render()
 {
     if (isReleased)
     {
-        if (x + width > windowWidth)
-        {
-            dirX = 1;
-        }
-        if (x < 0)
-        {
-            dirX = -1;
-        }
-        if (y < 0)
-        {
-            dirY = -1;
-        }
-        if (y + height > windowHeight)
-        {
-            dirY = 1;
-        }
+        // TODO: improve formula counting processor ticks
+        int speed = 2;
+        isBallHitBorder();
+        isBallHitPlatform();
 
        // std::cout << "x: " << x << " y: " << y << std::endl;
-        x = x - stepX * dirX;
-        y = y - stepY * dirY;
+        x = x - stepX * dirX * speed;
+        y = y - stepY * dirY * speed;
     }
     else
     {
@@ -43,19 +31,14 @@ void Ball::render()
 Ball::Ball(int x, int y, int width, int height, int windowWidth, int windowHeight) :
                                                 IObject(x, y, width, height, windowWidth, windowHeight)
 {
-    sprite = createSprite("data/62-Breakout-Tiles.png");
+    sprite = createSprite("data/watermelon.png");
     isReleased = false;
 
     platformX = 0;
     platformY = 0;
 
-    speed = 1;
-
     platformWidth = 0;
     platformHeight = 0;
-
-    speedX = 1;
-    velocityY = 1;
 
     dirX = 1;
     dirY = 1;
@@ -122,6 +105,7 @@ void Ball::setBallDestination(int x, int y)
      New algorithm:
           Description soon...
     */
+    // TODO: add description
     double xMouse = x;
     double yMouse = y;
 
@@ -138,4 +122,32 @@ void Ball::setBallDestination(int x, int y)
     stepX = xOffset / hypotensive;
     stepY = yOffset / hypotensive;
     // std::cout << "y = " << k << "*x + " << b << std::endl;
+}
+
+void Ball::isBallHitBorder()
+{
+    if (x + width > windowWidth)
+    {
+        dirX = 1;
+    }
+    if (x < 0)
+    {
+        dirX = -1;
+    }
+    if (y < 0)
+    {
+        dirY = -1;
+    }
+    if (y + height > windowHeight)
+    {
+        dirY = 1;
+    }
+}
+
+void Ball::isBallHitPlatform()
+{
+    if (x + width > platformX && x < platformX + platformWidth && y + height > platformY && y < platformY + platformHeight)
+    {
+        dirY = 1;
+    }
 }

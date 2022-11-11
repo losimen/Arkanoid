@@ -19,12 +19,6 @@ class Ball : public IObject
 private:
     bool isReleased;
 
-    int speed;
-    int direction;
-
-    int speedX;
-    int velocityY;
-
     int platformX;
     int platformY;
 
@@ -36,6 +30,10 @@ private:
 
     int dirX;
     int dirY;
+
+    void isBallHitPlatform();
+    void isBallHitBorder();
+
 public:
     Ball(int x, int y, int width, int height, int speed, int direction);
     ~Ball();
