@@ -11,6 +11,7 @@
 #include "Ball.h"
 #include "Block.h"
 #include "ScoreTab.h"
+#include "InfoTablo.h"
 
 
 class Game : public Framework
@@ -21,6 +22,9 @@ private:
     Ball *ball;
     std::vector<Block*> blocks;
     ScoreTab *scoreTab;
+
+    InfoTablo *winTab;
+    InfoTablo *loseTab;
 
     int width;
     int height;

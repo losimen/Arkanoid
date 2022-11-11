@@ -50,7 +50,7 @@ void Game::onMouseButtonClick(FRMouseButton button, bool isReleased)
         mouse->setIsVisible(false);
     }
 
-    std::cout << "Click " << count << std::endl;
+   // std::cout << "Click " << count << std::endl;
 }
 
 
@@ -60,6 +60,7 @@ void Game::onMouseMove(int x, int y, int xRelative, int yRelative)
     {
         mouse->onMouseMove(x, y, xRelative, yRelative);
     }
+   //  std::cout << "mouse|| " << "x: " << x << " y: " << y << std::endl;
 }
 
 
@@ -74,11 +75,11 @@ bool Game::Tick()
     }
     if (isLost)
     {
-
+        loseTab->render();
     }
     if (isWon)
     {
-
+        winTab->render();
     }
 
     return false;
@@ -97,6 +98,9 @@ bool Game::Init()
     mouse = new Mouse(0, 0, 24, 24, width, height);
     ball = new Ball(0, 0, 24, 24, width, height);
     scoreTab = new ScoreTab(width-200, 0, 100, 75, width, height);
+
+    winTab = new InfoTablo(width/2-250, height/2-100, 500, 200, width, height, "data/winTablo.png");
+    loseTab = new InfoTablo(width/2-250, height/2-100, 500, 200, width, height, "data/loseTablo.png");
 
     blocks.push_back(new Block(100, 0, 100, 50, width, height, 1, 100, BlockColor::RED));
     blocks.push_back(new Block(200, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
@@ -183,6 +187,12 @@ void Game::startGame()
 {
     mouse->setIsVisible(true);
     ball->setIsReleased(false);
+    Block::setDestroyedBlocks(0);
+
+    for (auto block : blocks)
+    {
+        block->setIsVisible(true);
+    }
 
     isLost = false;
     isWon = false;
@@ -193,6 +203,7 @@ void Game::startGame()
 void Game::stopGameLose()
 {
     isLost = true;
+    scoreTab->setScore(0);
 
     // TODO: how to clear correctly?
     // sleep???
@@ -205,14 +216,15 @@ void Game::stopGameWin()
 {
     isWon = true;
 
+    // TODO: how to clear correctly?
+    // sleep???
+
     std::cout << "You win!" << std::endl;
 }
 
 
 void Game::playGame()
 {
-    platform->render();
-
     HitType hitType = isCollide(platform, ball);
     if (hitType != HitType::NONE)
     {
@@ -239,6 +251,17 @@ void Game::playGame()
         block->render();
     }
 
+    platform->render();
+    ball->render();
+    scoreTab->render();
+
+    if (!ball->getIsReleased())
+    {
+        ball->setPlatformPosition(platform->getX(), platform->getY());
+        ball->setPlatformSize(platform->getWidth(), platform->getHeight());
+        mouse->render();
+    }
+
     if (ball->getY() > height-50)
     {
         isLost = true;
@@ -248,17 +271,6 @@ void Game::playGame()
     {
         isWon = true;
         stopGameWin();
-    }
-
-
-    ball->render();
-    scoreTab->render();
-
-    if (!ball->getIsReleased())
-    {
-        ball->setPlatformPosition(platform->getX(), platform->getY());
-        ball->setPlatformSize(platform->getWidth(), platform->getHeight());
-        mouse->render();
     }
 }
 

@@ -38,6 +38,7 @@ void Ball::render()
         y = (platformY - height)-5;
     }
 
+    //std::cout << "ball|| " << "x: " << x << " y: " << y << std::endl;
     drawSprite( sprite, x, y);
 }
 
@@ -130,6 +131,8 @@ void Ball::setBallDestination(int x, int y)
      New algorithm:
           Description soon...
     */
+    dirY = 1;
+    dirX = 1;
     // TODO: add description
     double xMouse = x;
     double yMouse = y;
