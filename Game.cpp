@@ -184,13 +184,6 @@ void Game::startGame()
     mouse->setIsVisible(true);
     ball->setIsReleased(false);
 
-    blocks.push_back(new Block(100, 0, 100, 50, width, height, 1, 100, BlockColor::RED));
-    blocks.push_back(new Block(200, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
-    blocks.push_back(new Block(300, 0, 100, 50, width, height, 1, 100, BlockColor::PURPLE));
-    blocks.push_back(new Block(400, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
-    blocks.push_back(new Block(200, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
-    blocks.push_back(new Block(350, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
-
     isLost = false;
     isWon = false;
     std::cout << "Game started" << std::endl;
@@ -220,11 +213,6 @@ void Game::playGame()
 {
     platform->render();
 
-    for (auto block : blocks)
-    {
-        block->render();
-    }
-
     HitType hitType = isCollide(platform, ball);
     if (hitType != HitType::NONE)
     {
@@ -233,13 +221,22 @@ void Game::playGame()
 
     for (int i = 0; i < blocks.size(); i++)
     {
+        if (!blocks[i]->getIsVisible())
+            continue;
+
         hitType = isCollide(blocks[i], ball);
         if (hitType != HitType::NONE)
         {
             changeBallDirection(hitType);
-            blocks.erase(blocks.begin() + i);
+            blocks[i]->setIsVisible(false);
             scoreTab->addScore(10);
+            blocks[i]->addDestroyedBlocks(1);
         }
+    }
+
+    for (auto block : blocks)
+    {
+        block->render();
     }
 
     if (ball->getY() > height-50)
@@ -247,11 +244,12 @@ void Game::playGame()
         isLost = true;
         stopGameLose();
     }
-    if (blocks.size() == 0)
+    if (blocks.size() == Block::getDestroyedBlocks())
     {
         isWon = true;
         stopGameWin();
     }
+
 
     ball->render();
     scoreTab->render();

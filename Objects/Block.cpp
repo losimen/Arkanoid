@@ -4,6 +4,8 @@
 
 #include "Block.h"
 
+int Block::destroyedBlocks = 0;
+
 
 Block::Block(int x, int y, int width, int height, int windowWidth, int windowHeight, int health, int score, BlockColor color): IObject(x, y, width, height, windowWidth, windowHeight)
 {
@@ -41,7 +43,28 @@ Block::~Block()
 
 }
 
+
 void Block::render()
 {
+    if (!isVisible)
+        return;
+
     drawSprite(sprite, x, y);
+}
+
+void Block::setDestroyedBlocks(int value)
+{
+    destroyedBlocks = value;
+}
+
+
+int Block::getDestroyedBlocks()
+{
+    return destroyedBlocks;
+}
+
+
+void Block::addDestroyedBlocks(int value)
+{
+    destroyedBlocks += value;
 }

@@ -22,6 +22,8 @@ enum class BlockColor
 class Block: public IObject
 {
 private:
+    static int destroyedBlocks;
+
     BlockColor blockColor;
     int health;
     int score;
@@ -31,6 +33,9 @@ public:
     ~Block();
 
     void render() override;
+    static void setDestroyedBlocks(int value);
+    static int getDestroyedBlocks();
+    static void addDestroyedBlocks(int value);
 };
 
 #endif //ARKANOID_BLOCK_H
