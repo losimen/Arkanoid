@@ -10,7 +10,16 @@ find_package(SDL2_image REQUIRED)
 file(GLOB LIBRARIES ${CMAKE_CURRENT_LIST_DIR}/cmake-build-debug/libFrameworkRelease.dylib)
 file(GLOB LIBRARIES ${CMAKE_CURRENT_LIST_DIR}/cmake-build-debug/libFrameworkRelease.0.0.1.dylib)
 
-link_directories(path_to_lib)
-add_executable(${PROJECT_NAME} main.cpp Game.cpp Game.h Platform.cpp Platform.h IObject.h Mouse.cpp Mouse.h Ball.cpp Ball.h IObejct.cpp Block.cpp Block.h)
+include(Objects/CMakeLists.txt)
+
+list(APPEND myApp_INCLUDES ${CMAKE_CURRENT_LIST_DIR})
+
+list(APPEND myApp_SOURCES ${CMAKE_CURRENT_LIST_DIR}/main.cpp
+                          ${CMAKE_CURRENT_LIST_DIR}/Game.cpp
+                          ${CMAKE_CURRENT_LIST_DIR}/Game.h
+                          ${CMAKE_CURRENT_LIST_DIR}/Framework.h)
+
+add_executable(${PROJECT_NAME} ${myApp_SOURCES})
+include_directories(${myApp_INCLUDES})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2_image::SDL2_image ${LIBRARIES})
