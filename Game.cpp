@@ -3,6 +3,7 @@
 //
 
 #include "Game.h"
+#include <iostream>
 
 
 const char *Game::GetTitle()
@@ -103,6 +104,7 @@ bool Game::Init()
     blocks.push_back(new Block(300, 0, 100, 50, width, height, 1, 100, BlockColor::PURPLE));
     blocks.push_back(new Block(400, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
     blocks.push_back(new Block(200, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
+    blocks.push_back(new Block(350, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
 
     return true;
 }
@@ -126,7 +128,7 @@ Game::Game(int width, int height)
 
 Game::HitType Game::isCollide(IObject *a, IObject *b)
 {
-    if (a->getRight() > b->getLeft() && a->getLeft() < b->getRight())
+    if (a->getRight()-2 > b->getLeft() && a->getLeft()+2 < b->getRight())
     {
         if (a->getBottom() > b->getTop() && a->getTop() < b->getTop())
         {
