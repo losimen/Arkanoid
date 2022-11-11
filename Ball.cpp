@@ -12,16 +12,15 @@ void Ball::render()
         // TODO: improve formula counting processor ticks
         int speed = 2;
         isBallHitBorder();
-        isBallHitPlatform();
 
-       // std::cout << "x: " << x << " y: " << y << std::endl;
+        // std::cout << "x: " << x << " y: " << y << std::endl;
         x = x - stepX * dirX * speed;
         y = y - stepY * dirY * speed;
     }
     else
     {
-        x = platformX + (platformWidth-width) / 2;
-        y = platformY - height;
+        x = (platformX + (platformWidth-width) / 2);
+        y = (platformY - height)-5;
     }
 
     drawSprite( sprite, x, y);
@@ -146,15 +145,25 @@ void Ball::isBallHitBorder()
 }
 
 
-void Ball::isBallHitPlatform()
+void Ball::reverseDirY()
 {
-    if (x + width > platformX && x < platformX + platformWidth && y + height > platformY && y < platformY + platformHeight)
-    {
-        dirY = 1;
-    }
+    dirY = -dirY;
 }
 
-void Ball::setBlocks(std::vector<IObject> blocks)
-{
 
+void Ball::reverseDirX()
+{
+    dirX = -dirX;
+}
+
+
+void Ball::setDirY(int dirY)
+{
+    this->dirY = dirY;
+}
+
+
+void Ball::setDirX(int dirX)
+{
+    this->dirX = dirX;
 }

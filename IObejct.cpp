@@ -53,3 +53,27 @@ IObject::~IObject()
 //        destroySprite(sprite);
 //    }
 }
+
+
+int IObject::getTop() const
+{
+    return y;
+}
+
+
+int IObject::getBottom() const
+{
+    return y+height;
+}
+
+
+int IObject::getLeft() const
+{
+    return x;
+}
+
+
+int IObject::getRight() const
+{
+    return x+width;
+}

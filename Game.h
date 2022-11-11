@@ -23,6 +23,15 @@ private:
     int width;
     int height;
 
+    enum class HitType
+    {
+        NONE,
+        TOP,
+        BOTTOM,
+        LEFT,
+        RIGHT
+    };
+
 public:
     Game(int width, int height);
 
@@ -37,6 +46,8 @@ public:
 
     void onKeyPressed(FRKey k) override;
     void onKeyReleased(FRKey k) override;
+
+    HitType isCollide(IObject *a, IObject *b);
 
     const char* GetTitle() override;
 };

@@ -31,7 +31,6 @@ private:
     int dirX;
     int dirY;
 
-    void isBallHitPlatform();
     void isBallHitBorder();
 
 public:
@@ -42,7 +41,11 @@ public:
     void setPlatformSize(int width, int height);
     void setIsReleased(bool isReleased);
     void setBallDestination(int x, int y);
-    void setBlocks(std::vector<IObject> blocks);
+
+    void reverseDirY();
+    void reverseDirX();
+    void setDirY(int dirY);
+    void setDirX(int dirX);
 
     void render() override;
 

@@ -7,7 +7,7 @@
 
 #include "Framework.h"
 #include <vector>
-
+#include <iostream>
 
 class IObject
 {
@@ -36,6 +36,11 @@ public:
 
     int getWidth() const;
     int getHeight() const;
+
+    int getTop() const;
+    int getBottom() const;
+    int getLeft() const;
+    int getRight() const;
 };
 
 

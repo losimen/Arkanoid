@@ -50,6 +50,8 @@ bool Game::Tick()
 
     if (!ball->getIsReleased())
     {
+        ball->setPlatformPosition(platform->getX(), platform->getY());
+        ball->setPlatformSize(platform->getWidth(), platform->getHeight());
         mouse->render();
     }
 
@@ -58,8 +60,39 @@ bool Game::Tick()
         block->render();
     }
 
-    ball->setPlatformPosition(platform->getX(), platform->getY());
-    ball->setPlatformSize(platform->getWidth(), platform->getHeight());
+    HitType hitType = isCollide(platform, ball);
+    if (hitType != HitType::NONE)
+    {
+        // TODO: improve collision detection
+        ball->reverseDirY();
+    }
+
+    for (auto block : blocks)
+    {
+        hitType = isCollide(block, ball);
+        if (hitType != HitType::NONE)
+        {
+            if (hitType == HitType::TOP)
+            {
+                ball->setDirY(-1);
+            }
+            if (hitType == HitType::BOTTOM)
+            {
+                ball->setDirY(1);
+            }
+            if (hitType == HitType::LEFT)
+            {
+                ball->setDirX(-1);
+            }
+            if (hitType == HitType::RIGHT)
+            {
+                ball->setDirX(1);
+            }
+
+//            block->setIsDestroyed(true);
+        }
+    }
+
     ball->render();
 
     return false;
@@ -85,7 +118,7 @@ bool Game::Init()
     blocks.push_back(new Block(200, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
     blocks.push_back(new Block(300, 0, 100, 50, width, height, 1, 100, BlockColor::PURPLE));
     blocks.push_back(new Block(400, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
-    blocks.push_back(new Block(500, 0, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
+    blocks.push_back(new Block(200, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
 
     return true;
 }
@@ -104,4 +137,52 @@ Game::Game(int width, int height)
 {
     this->width = width;
     this->height = height;
+}
+
+
+Game::HitType Game::isCollide(IObject *a, IObject *b)
+{
+
+//    if (a->getX() + a->getWidth() > b->getX() &&
+//        a->getX() < b->getX() + b->getWidth() &&
+//        a->getY() + a->getHeight() > b->getY() &&
+//        a->getY() < b->getY() + b->getHeight())
+//    {
+//        std::cout << "Collide" << std::endl;
+//        return true;
+//    }
+
+//    if (a->getRight() > b->getLeft() &&
+//        a->getLeft() < b->getRight() &&
+//        a->getBottom() > b->getTop() &&
+//        a->getTop() < b->getBottom())
+//    {
+//        // std::cout << "Collide" << std::endl;
+//    }
+
+    if (a->getRight() > b->getLeft() && a->getLeft() < b->getRight())
+    {
+        if (a->getBottom() > b->getTop() && a->getTop() < b->getTop())
+        {
+            return HitType::TOP;
+        }
+        else if (a->getTop() < b->getBottom() && a->getBottom() > b->getBottom())
+        {
+            return HitType::BOTTOM;
+        }
+    }
+
+    else if (a->getBottom() > b->getTop() && a->getTop() < b->getBottom())
+    {
+        if (a->getRight() > b->getLeft() && a->getLeft() < b->getLeft())
+        {
+            return HitType::LEFT;
+        }
+        else if (a->getLeft() < b->getRight() && a->getRight() > b->getRight())
+        {
+            return HitType::RIGHT;
+        }
+    }
+
+    return HitType::NONE;
 }
