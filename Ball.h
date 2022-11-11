@@ -33,6 +33,9 @@ private:
 
     double stepX;
     double stepY;
+
+    int dirX;
+    int dirY;
 public:
     Ball(int x, int y, int width, int height, int speed, int direction);
     ~Ball();

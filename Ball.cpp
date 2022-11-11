@@ -9,9 +9,26 @@ void Ball::render()
 {
     if (isReleased)
     {
+        if (x + width > windowWidth)
+        {
+            dirX = 1;
+        }
+        if (x < 0)
+        {
+            dirX = -1;
+        }
+        if (y < 0)
+        {
+            dirY = -1;
+        }
+        if (y + height > windowHeight)
+        {
+            dirY = 1;
+        }
+
        // std::cout << "x: " << x << " y: " << y << std::endl;
-        x = x - stepX;
-        y = y - stepY;
+        x = x - stepX * dirX;
+        y = y - stepY * dirY;
     }
     else
     {
@@ -39,6 +56,9 @@ Ball::Ball(int x, int y, int width, int height, int windowWidth, int windowHeigh
 
     speedX = 1;
     velocityY = 1;
+
+    dirX = 1;
+    dirY = 1;
 
     setSpriteSize(sprite, width, height);
 }
@@ -104,6 +124,11 @@ void Ball::setBallDestination(int x, int y)
     */
     double xMouse = x;
     double yMouse = y;
+
+    if (xMouse > this->x)
+    {
+        dirX = -dirX;
+    }
 
     double xOffset = std::fabs(xMouse - this->x);
     double yOffset = std::fabs(yMouse - this->y);
