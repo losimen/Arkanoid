@@ -145,18 +145,6 @@ void Ball::isBallHitBorder()
 }
 
 
-void Ball::reverseDirY()
-{
-    dirY = -dirY;
-}
-
-
-void Ball::reverseDirX()
-{
-    dirX = -dirX;
-}
-
-
 void Ball::setDirY(int dirY)
 {
     this->dirY = dirY;

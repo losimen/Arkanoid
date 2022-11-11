@@ -63,8 +63,7 @@ bool Game::Tick()
     HitType hitType = isCollide(platform, ball);
     if (hitType != HitType::NONE)
     {
-        // TODO: improve collision detection
-        ball->reverseDirY();
+        changeBallDirection(hitType);
     }
 
     for (int i = 0; i < blocks.size(); i++)
@@ -72,23 +71,7 @@ bool Game::Tick()
         hitType = isCollide(blocks[i], ball);
         if (hitType != HitType::NONE)
         {
-            if (hitType == HitType::TOP)
-            {
-                ball->setDirY(-1);
-            }
-            if (hitType == HitType::BOTTOM)
-            {
-                ball->setDirY(1);
-            }
-            if (hitType == HitType::LEFT)
-            {
-                ball->setDirX(-1);
-            }
-            if (hitType == HitType::RIGHT)
-            {
-                ball->setDirX(1);
-            }
-
+            changeBallDirection(hitType);
             blocks.erase(blocks.begin() + i);
         }
     }
@@ -167,4 +150,27 @@ Game::HitType Game::isCollide(IObject *a, IObject *b)
     }
 
     return HitType::NONE;
+}
+
+void Game::changeBallDirection(Game::HitType hitType)
+{
+    if (hitType == HitType::NONE)
+        return;
+
+    if (hitType == HitType::TOP)
+    {
+        ball->setDirY(-1);
+    }
+    else if (hitType == HitType::BOTTOM)
+    {
+        ball->setDirY(1);
+    }
+    else if (hitType == HitType::LEFT)
+    {
+        ball->setDirX(-1);
+    }
+    else
+    {
+        ball->setDirX(1);
+    }
 }

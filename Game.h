@@ -48,6 +48,7 @@ public:
     void onKeyReleased(FRKey k) override;
 
     HitType isCollide(IObject *a, IObject *b);
+    void changeBallDirection(HitType hitType);
 
     const char* GetTitle() override;
 };

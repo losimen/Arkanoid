@@ -42,8 +42,6 @@ public:
     void setIsReleased(bool isReleased);
     void setBallDestination(int x, int y);
 
-    void reverseDirY();
-    void reverseDirX();
     void setDirY(int dirY);
     void setDirX(int dirX);
 
