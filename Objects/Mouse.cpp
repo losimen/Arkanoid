@@ -6,6 +6,8 @@
 
 void Mouse::render()
 {
+    if (!isVisible)
+        return;
     drawSprite(sprite, x - width / 2, y - height / 2);
 }
 

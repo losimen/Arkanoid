@@ -26,12 +26,31 @@ void Game::onKeyPressed(FRKey k)
 
 void Game::onMouseButtonClick(FRMouseButton button, bool isReleased)
 {
+    // if I do click one time this event will be called twice
+    // to prevent this I will do next:
+    static int count = 1;
+
+    count++;
+    if (count % 2 != 0)
+    {
+        return;
+    }
+
+    if (isLost || isWon)
+    {
+        startGame();
+        return;
+    }
+
     if (!ball->getIsReleased())
     {
         ball->setIsReleased(true);
         ball->setBallDestination(mouse->getX(), mouse->getY());
-        destroySprite(mouse->getSprite());
+
+        mouse->setIsVisible(false);
     }
+
+    std::cout << "Click " << count << std::endl;
 }
 
 
@@ -55,11 +74,11 @@ bool Game::Tick()
     }
     if (isLost)
     {
-        // display lost screen
+
     }
     if (isWon)
     {
-        // display won screen
+
     }
 
     return false;
@@ -74,7 +93,17 @@ void Game::Close()
 
 bool Game::Init()
 {
-    startGame();
+    platform = new Platform(0, 0, 90, 25, width, height);
+    mouse = new Mouse(0, 0, 24, 24, width, height);
+    ball = new Ball(0, 0, 24, 24, width, height);
+    scoreTab = new ScoreTab(width-200, 0, 100, 75, width, height);
+
+    blocks.push_back(new Block(100, 0, 100, 50, width, height, 1, 100, BlockColor::RED));
+    blocks.push_back(new Block(200, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
+    blocks.push_back(new Block(300, 0, 100, 50, width, height, 1, 100, BlockColor::PURPLE));
+    blocks.push_back(new Block(400, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
+    blocks.push_back(new Block(200, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
+    blocks.push_back(new Block(350, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
 
     return true;
 }
@@ -152,10 +181,8 @@ void Game::changeBallDirection(Game::HitType hitType)
 
 void Game::startGame()
 {
-    platform = new Platform(0, 0, 90, 25, width, height);
-    mouse = new Mouse(0, 0, 24, 24, width, height);
-    ball = new Ball(0, 0, 24, 24, width, height);
-    scoreTab = new ScoreTab(width-200, 0, 100, 75, width, height);
+    mouse->setIsVisible(true);
+    ball->setIsReleased(false);
 
     blocks.push_back(new Block(100, 0, 100, 50, width, height, 1, 100, BlockColor::RED));
     blocks.push_back(new Block(200, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
@@ -163,6 +190,10 @@ void Game::startGame()
     blocks.push_back(new Block(400, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
     blocks.push_back(new Block(200, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
     blocks.push_back(new Block(350, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
+
+    isLost = false;
+    isWon = false;
+    std::cout << "Game started" << std::endl;
 }
 
 
@@ -170,9 +201,9 @@ void Game::stopGameLose()
 {
     isLost = true;
 
-    destroySprite(platform->getSprite());
-    destroySprite(ball->getSprite());
-    destroySprite(scoreTab->getSprite());
+    // TODO: how to clear correctly?
+    // sleep???
+
     std::cout << "Game over" << std::endl;
 }
 
@@ -181,9 +212,6 @@ void Game::stopGameWin()
 {
     isWon = true;
 
-    destroySprite(platform->getSprite());
-    destroySprite(ball->getSprite());
-    destroySprite(scoreTab->getSprite());
     std::cout << "You win!" << std::endl;
 }
 

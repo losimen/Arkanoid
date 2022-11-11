@@ -23,6 +23,7 @@ protected:
     int windowWidth;
     int windowHeight;
 
+    bool isVisible;
 public:
     IObject(int x, int y, int width, int height, int windowWidth, int windowHeight);
     ~IObject();
@@ -41,6 +42,9 @@ public:
     int getBottom() const;
     int getLeft() const;
     int getRight() const;
+
+    bool getIsVisible() const;
+    void setIsVisible(bool isVisible);
 };
 
 

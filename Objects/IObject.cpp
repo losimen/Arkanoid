@@ -13,6 +13,7 @@ IObject::IObject(int x, int y, int width, int height, int windowWidth, int windo
     this->height = height;
     this->windowWidth = windowWidth;
     this->windowHeight = windowHeight;
+    isVisible = true;
 }
 
 
@@ -76,4 +77,14 @@ int IObject::getLeft() const
 int IObject::getRight() const
 {
     return x+width;
+}
+
+bool IObject::getIsVisible() const
+{
+    return isVisible;
+}
+
+void IObject::setIsVisible(bool isVisible)
+{
+    this->isVisible = isVisible;
 }
