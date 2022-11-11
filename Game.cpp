@@ -67,9 +67,9 @@ bool Game::Tick()
         ball->reverseDirY();
     }
 
-    for (auto block : blocks)
+    for (int i = 0; i < blocks.size(); i++)
     {
-        hitType = isCollide(block, ball);
+        hitType = isCollide(blocks[i], ball);
         if (hitType != HitType::NONE)
         {
             if (hitType == HitType::TOP)
@@ -89,7 +89,7 @@ bool Game::Tick()
                 ball->setDirX(1);
             }
 
-//            block->setIsDestroyed(true);
+            blocks.erase(blocks.begin() + i);
         }
     }
 
@@ -142,24 +142,6 @@ Game::Game(int width, int height)
 
 Game::HitType Game::isCollide(IObject *a, IObject *b)
 {
-
-//    if (a->getX() + a->getWidth() > b->getX() &&
-//        a->getX() < b->getX() + b->getWidth() &&
-//        a->getY() + a->getHeight() > b->getY() &&
-//        a->getY() < b->getY() + b->getHeight())
-//    {
-//        std::cout << "Collide" << std::endl;
-//        return true;
-//    }
-
-//    if (a->getRight() > b->getLeft() &&
-//        a->getLeft() < b->getRight() &&
-//        a->getBottom() > b->getTop() &&
-//        a->getTop() < b->getBottom())
-//    {
-//        // std::cout << "Collide" << std::endl;
-//    }
-
     if (a->getRight() > b->getLeft() && a->getLeft() < b->getRight())
     {
         if (a->getBottom() > b->getTop() && a->getTop() < b->getTop())
