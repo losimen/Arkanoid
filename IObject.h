@@ -6,6 +6,8 @@
 #define ARKANOID_IOBJECT_H
 
 #include "Framework.h"
+#include <vector>
+
 
 class IObject
 {

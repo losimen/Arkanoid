@@ -42,6 +42,7 @@ public:
     void setPlatformSize(int width, int height);
     void setIsReleased(bool isReleased);
     void setBallDestination(int x, int y);
+    void setBlocks(std::vector<IObject> blocks);
 
     void render() override;
 

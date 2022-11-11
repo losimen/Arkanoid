@@ -53,6 +53,11 @@ bool Game::Tick()
         mouse->render();
     }
 
+    for (auto block : blocks)
+    {
+        block->render();
+    }
+
     ball->setPlatformPosition(platform->getX(), platform->getY());
     ball->setPlatformSize(platform->getWidth(), platform->getHeight());
     ball->render();
@@ -74,6 +79,13 @@ bool Game::Init()
     platform = new Platform(0, 0, 90, 25, width, height);
     mouse = new Mouse(0, 0, 24, 24, width, height);
     ball = new Ball(0, 0, 24, 24, width, height);
+
+    blocks.push_back(new Block(0, 0, 100, 50, width, height, 1, 100, BlockColor::BLUE));
+    blocks.push_back(new Block(100, 0, 100, 50, width, height, 1, 100, BlockColor::RED));
+    blocks.push_back(new Block(200, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
+    blocks.push_back(new Block(300, 0, 100, 50, width, height, 1, 100, BlockColor::PURPLE));
+    blocks.push_back(new Block(400, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
+    blocks.push_back(new Block(500, 0, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
 
     return true;
 }

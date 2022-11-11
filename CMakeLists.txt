@@ -11,6 +11,6 @@ file(GLOB LIBRARIES ${CMAKE_CURRENT_LIST_DIR}/cmake-build-debug/libFrameworkRele
 file(GLOB LIBRARIES ${CMAKE_CURRENT_LIST_DIR}/cmake-build-debug/libFrameworkRelease.0.0.1.dylib)
 
 link_directories(path_to_lib)
-add_executable(${PROJECT_NAME} main.cpp Game.cpp Game.h Platform.cpp Platform.h IObject.h Mouse.cpp Mouse.h Ball.cpp Ball.h IObejct.cpp)
+add_executable(${PROJECT_NAME} main.cpp Game.cpp Game.h Platform.cpp Platform.h IObject.h Mouse.cpp Mouse.h Ball.cpp Ball.h IObejct.cpp Block.cpp Block.h)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2_image::SDL2_image ${LIBRARIES})

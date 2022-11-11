@@ -67,9 +67,9 @@ bool Ball::getIsReleased() const
 }
 
 
-void Ball::setIsReleased(bool isReleased)
+void Ball::setIsReleased(bool _isReleased)
 {
-    this->isReleased = isReleased;
+    isReleased = _isReleased;
 }
 
 
@@ -124,6 +124,7 @@ void Ball::setBallDestination(int x, int y)
     // std::cout << "y = " << k << "*x + " << b << std::endl;
 }
 
+
 void Ball::isBallHitBorder()
 {
     if (x + width > windowWidth)
@@ -144,10 +145,16 @@ void Ball::isBallHitBorder()
     }
 }
 
+
 void Ball::isBallHitPlatform()
 {
     if (x + width > platformX && x < platformX + platformWidth && y + height > platformY && y < platformY + platformHeight)
     {
         dirY = 1;
     }
+}
+
+void Ball::setBlocks(std::vector<IObject> blocks)
+{
+
 }

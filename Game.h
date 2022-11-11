@@ -9,6 +9,7 @@
 #include "Platform.h"
 #include "Mouse.h"
 #include "Ball.h"
+#include "Block.h"
 
 
 class Game : public Framework
@@ -17,6 +18,7 @@ private:
     Platform *platform;
     Mouse *mouse;
     Ball *ball;
+    std::vector<Block*> blocks;
 
     int width;
     int height;
