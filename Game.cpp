@@ -49,9 +49,17 @@ bool Game::Tick()
     // TODO: improve formula in movements counting processor ticks
     drawTestBackground();
 
-    if (!isLost)
+    if (!isLost  && !isWon)
     {
         playGame();
+    }
+    if (isLost)
+    {
+        // display lost screen
+    }
+    if (isWon)
+    {
+        // display won screen
     }
 
     return false;
@@ -171,7 +179,11 @@ void Game::stopGameLose()
 
 void Game::stopGameWin()
 {
-    delete platform;
+    isWon = true;
+
+    destroySprite(platform->getSprite());
+    destroySprite(ball->getSprite());
+    destroySprite(scoreTab->getSprite());
     std::cout << "You win!" << std::endl;
 }
 
