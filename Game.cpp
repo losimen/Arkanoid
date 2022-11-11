@@ -153,6 +153,7 @@ Game::HitType Game::isCollide(IObject *a, IObject *b)
     return HitType::NONE;
 }
 
+
 void Game::changeBallDirection(Game::HitType hitType)
 {
     if (hitType == HitType::NONE)
