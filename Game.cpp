@@ -45,6 +45,7 @@ void Game::onMouseMove(int x, int y, int xRelative, int yRelative)
 
 bool Game::Tick()
 {
+    // TODO: improve formula counting processor ticks
     drawTestBackground();
     platform->render();
 

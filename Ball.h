@@ -10,10 +10,6 @@
 #include <cmath>
 
 
-#define PI 3.14159265
-#define DEGREES_TO_RADIANS(angle) ((angle) * PI / 180.0)
-
-
 class Ball : public IObject
 {
 private:
@@ -24,6 +20,17 @@ private:
 
     int platformWidth;
     int platformHeight;
+
+    Sprite *sprite1;
+    Sprite *sprite2;
+    Sprite *sprite3;
+
+    enum class BallSprite
+    {
+        SPRITE1,
+        SPRITE2,
+        SPRITE3
+    } currentSprite;
 
     double stepX;
     double stepY;

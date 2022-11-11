@@ -9,9 +9,24 @@ void Ball::render()
 {
     if (isReleased)
     {
-        // TODO: improve formula counting processor ticks
         int speed = 2;
         isBallHitBorder();
+
+        switch(currentSprite)
+        {
+            case BallSprite::SPRITE1:
+                sprite = sprite1;
+                currentSprite = BallSprite::SPRITE2;
+                break;
+            case BallSprite::SPRITE2:
+                sprite = sprite2;
+                currentSprite = BallSprite::SPRITE3;
+                break;
+            case BallSprite::SPRITE3:
+                sprite = sprite3;
+                currentSprite = BallSprite::SPRITE1;
+                break;
+        }
 
         // std::cout << "x: " << x << " y: " << y << std::endl;
         x = x - stepX * dirX * speed;
@@ -30,7 +45,6 @@ void Ball::render()
 Ball::Ball(int x, int y, int width, int height, int windowWidth, int windowHeight) :
                                                 IObject(x, y, width, height, windowWidth, windowHeight)
 {
-    sprite = createSprite("data/watermelon.png");
     isReleased = false;
 
     platformX = 0;
@@ -38,6 +52,18 @@ Ball::Ball(int x, int y, int width, int height, int windowWidth, int windowHeigh
 
     platformWidth = 0;
     platformHeight = 0;
+
+    sprite1 = createSprite("data/90.png");
+    setSpriteSize(sprite1, width, height);
+
+    sprite2 = createSprite("data/45.png");
+    setSpriteSize(sprite2, width, height);
+
+    sprite3 = createSprite("data/-45.png");
+    setSpriteSize(sprite3, width, height);
+
+    currentSprite = BallSprite::SPRITE1;
+    sprite = sprite1;
 
     dirX = 1;
     dirY = 1;
