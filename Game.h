@@ -10,6 +10,7 @@
 #include "Mouse.h"
 #include "Ball.h"
 #include "Block.h"
+#include "ScoreTab.h"
 
 
 class Game : public Framework
@@ -19,6 +20,7 @@ private:
     Mouse *mouse;
     Ball *ball;
     std::vector<Block*> blocks;
+    ScoreTab *scoreTab;
 
     int width;
     int height;
@@ -31,6 +33,9 @@ private:
         LEFT,
         RIGHT
     };
+
+    bool isLost = false;
+    bool isWon = false;
 
 public:
     Game(int width, int height);
@@ -46,6 +51,12 @@ public:
 
     void onKeyPressed(FRKey k) override;
     void onKeyReleased(FRKey k) override;
+
+    void startGame();
+    void stopGameLose();
+    void stopGameWin();
+
+    void playGame();
 
     HitType isCollide(IObject *a, IObject *b);
     void changeBallDirection(HitType hitType);

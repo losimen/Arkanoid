@@ -46,39 +46,13 @@ void Game::onMouseMove(int x, int y, int xRelative, int yRelative)
 
 bool Game::Tick()
 {
-    // TODO: improve formula counting processor ticks
+    // TODO: improve formula in movements counting processor ticks
     drawTestBackground();
-    platform->render();
 
-    if (!ball->getIsReleased())
+    if (!isLost)
     {
-        ball->setPlatformPosition(platform->getX(), platform->getY());
-        ball->setPlatformSize(platform->getWidth(), platform->getHeight());
-        mouse->render();
+        playGame();
     }
-
-    for (auto block : blocks)
-    {
-        block->render();
-    }
-
-    HitType hitType = isCollide(platform, ball);
-    if (hitType != HitType::NONE)
-    {
-        changeBallDirection(hitType);
-    }
-
-    for (int i = 0; i < blocks.size(); i++)
-    {
-        hitType = isCollide(blocks[i], ball);
-        if (hitType != HitType::NONE)
-        {
-            changeBallDirection(hitType);
-            blocks.erase(blocks.begin() + i);
-        }
-    }
-
-    ball->render();
 
     return false;
 }
@@ -86,25 +60,13 @@ bool Game::Tick()
 
 void Game::Close()
 {
-    delete platform;
-    delete mouse;
-    delete ball;
+
 }
 
 
 bool Game::Init()
 {
-    platform = new Platform(0, 0, 90, 25, width, height);
-    mouse = new Mouse(0, 0, 24, 24, width, height);
-    ball = new Ball(0, 0, 24, 24, width, height);
-
-    blocks.push_back(new Block(0, 0, 100, 50, width, height, 1, 100, BlockColor::BLUE));
-    blocks.push_back(new Block(100, 0, 100, 50, width, height, 1, 100, BlockColor::RED));
-    blocks.push_back(new Block(200, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
-    blocks.push_back(new Block(300, 0, 100, 50, width, height, 1, 100, BlockColor::PURPLE));
-    blocks.push_back(new Block(400, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
-    blocks.push_back(new Block(200, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
-    blocks.push_back(new Block(350, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
+    startGame();
 
     return true;
 }
@@ -178,3 +140,87 @@ void Game::changeBallDirection(Game::HitType hitType)
         ball->setDirX(1);
     }
 }
+
+
+void Game::startGame()
+{
+    platform = new Platform(0, 0, 90, 25, width, height);
+    mouse = new Mouse(0, 0, 24, 24, width, height);
+    ball = new Ball(0, 0, 24, 24, width, height);
+    scoreTab = new ScoreTab(width-200, 0, 100, 75, width, height);
+
+    blocks.push_back(new Block(100, 0, 100, 50, width, height, 1, 100, BlockColor::RED));
+    blocks.push_back(new Block(200, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
+    blocks.push_back(new Block(300, 0, 100, 50, width, height, 1, 100, BlockColor::PURPLE));
+    blocks.push_back(new Block(400, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
+    blocks.push_back(new Block(200, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
+    blocks.push_back(new Block(350, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
+}
+
+
+void Game::stopGameLose()
+{
+    isLost = true;
+
+    destroySprite(platform->getSprite());
+    destroySprite(ball->getSprite());
+    destroySprite(scoreTab->getSprite());
+    std::cout << "Game over" << std::endl;
+}
+
+
+void Game::stopGameWin()
+{
+    delete platform;
+    std::cout << "You win!" << std::endl;
+}
+
+
+void Game::playGame()
+{
+    platform->render();
+
+    for (auto block : blocks)
+    {
+        block->render();
+    }
+
+    HitType hitType = isCollide(platform, ball);
+    if (hitType != HitType::NONE)
+    {
+        changeBallDirection(hitType);
+    }
+
+    for (int i = 0; i < blocks.size(); i++)
+    {
+        hitType = isCollide(blocks[i], ball);
+        if (hitType != HitType::NONE)
+        {
+            changeBallDirection(hitType);
+            blocks.erase(blocks.begin() + i);
+            scoreTab->addScore(10);
+        }
+    }
+
+    if (ball->getY() > height-50)
+    {
+        isLost = true;
+        stopGameLose();
+    }
+    if (blocks.size() == 0)
+    {
+        isWon = true;
+        stopGameWin();
+    }
+
+    ball->render();
+    scoreTab->render();
+
+    if (!ball->getIsReleased())
+    {
+        ball->setPlatformPosition(platform->getX(), platform->getY());
+        ball->setPlatformSize(platform->getWidth(), platform->getHeight());
+        mouse->render();
+    }
+}
+
