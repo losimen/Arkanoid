@@ -56,7 +56,7 @@ void Game::onMouseButtonClick(FRMouseButton button, bool isReleased)
 
 void Game::onMouseMove(int x, int y, int xRelative, int yRelative)
 {
-    if (!ball->getIsReleased())
+    if (mouse->getIsVisible())
     {
         mouse->onMouseMove(x, y, xRelative, yRelative);
     }
@@ -76,10 +76,12 @@ bool Game::Tick()
     if (isLost)
     {
         loseTab->render();
+        mouse->render();
     }
     if (isWon)
     {
         winTab->render();
+        mouse->render();
     }
 
     return false;
@@ -94,6 +96,8 @@ void Game::Close()
 
 bool Game::Init()
 {
+    showCursor(false);
+
     platform = new Platform(0, 0, 90, 25, width, height);
     mouse = new Mouse(0, 0, 24, 24, width, height);
     ball = new Ball(0, 0, 24, 24, width, height);
@@ -193,7 +197,6 @@ void Game::changeBallDirection(Game::HitType hitType)
 
 void Game::startGame()
 {
-    mouse->setIsVisible(true);
     ball->setIsReleased(false);
     scoreTab->setBlocksDestroyedROW(0);
     Block::setDestroyedBlocks(0);
@@ -211,6 +214,7 @@ void Game::startGame()
 
 void Game::stopGameLose()
 {
+    mouse->setIsVisible(true);
     isLost = true;
     scoreTab->setScore(0);
 
@@ -223,6 +227,7 @@ void Game::stopGameLose()
 
 void Game::stopGameWin()
 {
+    mouse->setIsVisible(true);
     isWon = true;
 
     // TODO: how to clear correctly?
