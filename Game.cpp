@@ -66,7 +66,8 @@ void Game::onMouseMove(int x, int y, int xRelative, int yRelative)
 
 bool Game::Tick()
 {
-    // TODO: improve formula in movements counting processor ticks
+    // TODO: use tick for object movement
+    tickStart = getTickCount();
     drawTestBackground();
 
     if (!isLost  && !isWon)
@@ -75,15 +76,16 @@ bool Game::Tick()
     }
     if (isLost)
     {
-        loseTab->render();
-        mouse->render();
+        loseTab->render(tickDelta);
+        mouse->render(tickDelta);
     }
     if (isWon)
     {
-        winTab->render();
-        mouse->render();
+        winTab->render(tickDelta);
+        mouse->render(tickDelta);
     }
 
+    tickDelta = getTickCount() - tickStart;
     return false;
 }
 
@@ -255,9 +257,9 @@ void Game::stopGameWin()
 
 void Game::playGame()
 {
-    platform->render();
-    ball->render();
-    scoreTab->render();
+    platform->render(tickDelta);
+    ball->render(tickDelta);
+    scoreTab->render(tickDelta);
 
     spawnAbility();
 
@@ -269,19 +271,19 @@ void Game::playGame()
 
     for (auto block : blocks)
     {
-        block->render();
+        block->render(tickDelta);
     }
 
     for (auto ability : abilitiesOnScreen)
     {
-        ability->render();
+        ability->render(tickDelta);
     }
 
     if (!ball->getIsReleased())
     {
         ball->setPlatformPosition(platform->getX(), platform->getY());
         ball->setPlatformSize(platform->getWidth(), platform->getHeight());
-        mouse->render();
+        mouse->render(tickDelta);
     }
 }
 
@@ -347,6 +349,9 @@ void Game::isCollideBallWithBlocks()
             {
                 for (int j = 0; j < blocks.size(); j++)
                 {
+                    if (!blocks[j]->getIsVisible())
+                        continue;
+
                     hitType = isCollide(blocks[j], blocks[i], 10);
                     if (hitType != HitType::NONE)
                     {
@@ -379,7 +384,6 @@ void Game::isCollidePlatformWithAbilities()
             if (abilitiesOnScreen[i]->getType() == AbilitiesType::PLUS_50_SCORES)
             {
                 scoreTab->addScore(50);
-                std::cout << "Ability picked up  + 50" << std::endl;
             }
             else if (abilitiesOnScreen[i]->getType() == AbilitiesType::PLUS_100_SCORES)
             {
@@ -397,14 +401,14 @@ void Game::isCollidePlatformWithAbilities()
             {
                 if (platform->getSpeed() > 1)
                 {
-                    platform->setSpeed(platform->getSpeed() - 1);
+                    platform->setSpeed(platform->getSpeed() - 5);
                 }
             }
             else if (abilitiesOnScreen[i]->getType() == AbilitiesType::FAST_PLATFORM)
             {
                 if (platform->getSpeed() < 10)
                 {
-                    platform->setSpeed(platform->getSpeed() + 1);
+                    platform->setSpeed(platform->getSpeed() + 5);
                 }
             }
 

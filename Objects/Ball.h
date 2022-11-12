@@ -39,6 +39,7 @@ private:
     int dirY;
 
     void isBallHitBorder();
+    int speed;
 
 public:
     Ball(int x, int y, int width, int height, int speed, int direction);
@@ -52,7 +53,7 @@ public:
     void setDirY(int dirY);
     void setDirX(int dirX);
 
-    void render() override;
+    void render(unsigned int timeDelta) override;
 
     bool getIsReleased() const;
 

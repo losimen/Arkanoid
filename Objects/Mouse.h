@@ -14,7 +14,7 @@ public:
     Mouse(int x, int y, int width, int height, int windowWidth, int windowHeight);
     ~Mouse();
 
-    void render() override;
+    void render(unsigned int timeDelta) override;
     void onMouseMove(int x, int y, int xRelative, int yRelative);
 
 };

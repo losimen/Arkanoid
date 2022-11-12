@@ -54,6 +54,10 @@ private:
     bool isLost;
     bool isWon;
 
+    unsigned int tickStart;
+    unsigned int tickEnd;
+    unsigned int tickDelta;
+
     Abilities *getRandomAbility();
 
     void startGame();

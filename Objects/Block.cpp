@@ -44,7 +44,7 @@ Block::~Block()
 }
 
 
-void Block::render()
+void Block::render(unsigned int timeDelta)
 {
     if (!isVisible)
         return;

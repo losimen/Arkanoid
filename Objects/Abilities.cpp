@@ -34,7 +34,7 @@ Abilities::Abilities(int x, int y, int width, int height, int windowWidth, int w
 }
 
 
-void Abilities::render()
+void Abilities::render(unsigned int timeDelta)
 {
     y = y + 0.3;
 

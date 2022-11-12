@@ -33,7 +33,7 @@ public:
     Block(int x, int y, int width, int height, int windowWidth, int windowHeight, int health, int score, BlockColor color);
     ~Block();
 
-    void render() override;
+    void render(unsigned int timeDelta) override;
 
     static void setDestroyedBlocks(int value);
     static int getDestroyedBlocks();

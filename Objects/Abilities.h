@@ -28,7 +28,7 @@ private:
 public:
     Abilities(int x, int y, int width, int height, int windowWidth, int windowHeight, AbilitiesType type);
 
-    void render() override;
+    void render(unsigned int timeDelta) override;
 
     AbilitiesType getType() const;
 

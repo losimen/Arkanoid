@@ -14,7 +14,7 @@ public:
     InfoTablo(int x, int y, int width, int height, int windowWidth, int windowHeight, const char *path);
     ~InfoTablo();
 
-    void render() override;
+    void render(unsigned int timeDelta) override;
 };
 
 

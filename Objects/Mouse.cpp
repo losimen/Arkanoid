@@ -4,7 +4,7 @@
 
 #include "Mouse.h"
 
-void Mouse::render()
+void Mouse::render(unsigned int timeDelta)
 {
     if (!isVisible)
         return;

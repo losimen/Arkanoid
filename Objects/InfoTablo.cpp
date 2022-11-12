@@ -18,7 +18,7 @@ InfoTablo::~InfoTablo()
 }
 
 
-void InfoTablo::render()
+void InfoTablo::render(unsigned int timeDelta)
 {
     drawSprite(sprite, x, y);
 }

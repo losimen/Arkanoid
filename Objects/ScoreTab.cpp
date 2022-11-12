@@ -33,7 +33,7 @@ ScoreTab::~ScoreTab()
 }
 
 
-void ScoreTab::render()
+void ScoreTab::render(unsigned int timeDelta)
 {
     std::vector<int> nums;
     int scoreCopy = score;

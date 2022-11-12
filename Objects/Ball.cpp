@@ -5,11 +5,10 @@
 #include "Ball.h"
 
 
-void Ball::render()
+void Ball::render(unsigned int timeDelta)
 {
     if (isReleased)
     {
-        int speed = 2;
         isBallHitBorder();
 
         switch(currentSprite)
@@ -29,6 +28,10 @@ void Ball::render()
         }
 
         // std::cout << "x: " << x << " y: " << y << std::endl;
+        // TODO: optimize this
+//        x = x - stepX * dirX * speed *  timeDelta;
+//        y = y - stepY * dirY * speed * timeDelta;
+
         x = x - stepX * dirX * speed;
         y = y - stepY * dirY * speed;
     }
@@ -53,6 +56,8 @@ Ball::Ball(int x, int y, int width, int height, int windowWidth, int windowHeigh
 
     platformWidth = 0;
     platformHeight = 0;
+
+    speed = 2;
 
     sprite1 = createSprite("data/90.png");
     setSpriteSize(sprite1, width, height);

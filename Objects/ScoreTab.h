@@ -29,7 +29,7 @@ public:
     void setScore(int score);
     void addScore(int score);
 
-    void render() override;
+    void render(unsigned int timeDelta) override;
 };
 
 

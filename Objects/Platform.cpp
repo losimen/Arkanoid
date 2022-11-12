@@ -5,7 +5,7 @@
 #include "Platform.h"
 
 
-void Platform::render()
+void Platform::render(unsigned int tickDelta)
 {
     switch(currentSprite)
     {
@@ -25,6 +25,9 @@ void Platform::render()
 
     if (isRight)
     {
+        // TODO: optimize this
+        // x = x + speed * tickDelta;
+
         x = x + speed;
 
         if (x > windowRightBorder)
@@ -35,6 +38,9 @@ void Platform::render()
 
     if (isLeft)
     {
+        // TODO: optimize this
+        // x = x - speed * tickDelta;
+
         x = x - speed;
 
         if (x < windowLeftBorder)
@@ -79,7 +85,7 @@ Platform::Platform(int x, int y, int width, int height, int windowWidth, int win
                                                        windowRightBorder(windowWidth - width)
 
 {
-    speed = 2.5;
+    speed = 2;
 
     isLeft = false;
     isRight = false;
