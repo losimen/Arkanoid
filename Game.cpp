@@ -102,6 +102,9 @@ bool Game::Init()
     winTab = new InfoTablo(width/2-250, height/2-100, 500, 200, width, height, "data/winTablo.png");
     loseTab = new InfoTablo(width/2-250, height/2-100, 500, 200, width, height, "data/loseTablo.png");
 
+
+    // TODO: random blocks generator
+    blocks.push_back(new Block(0, 0, 100, 50, width, height, 1, 100, BlockColor::RED));
     blocks.push_back(new Block(100, 0, 100, 50, width, height, 1, 100, BlockColor::RED));
     blocks.push_back(new Block(200, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
     blocks.push_back(new Block(300, 0, 100, 50, width, height, 1, 100, BlockColor::PURPLE));
@@ -225,11 +228,17 @@ void Game::stopGameWin()
 
 void Game::playGame()
 {
-    HitType hitType = isCollide(platform, ball);
+    HitType hitType;
+
+    hitType = isCollide(platform, ball);
     if (hitType != HitType::NONE)
     {
         changeBallDirection(hitType);
     }
+
+    platform->render();
+    ball->render();
+    scoreTab->render();
 
     for (int i = 0; i < blocks.size(); i++)
     {
@@ -250,10 +259,6 @@ void Game::playGame()
     {
         block->render();
     }
-
-    platform->render();
-    ball->render();
-    scoreTab->render();
 
     if (!ball->getIsReleased())
     {
