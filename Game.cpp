@@ -226,7 +226,7 @@ void Game::startGame()
 
     isLost = false;
     isWon = false;
-    std::cout << "Game started" << std::endl;
+    // std::cout << "Game started" << std::endl;
 }
 
 
@@ -239,7 +239,7 @@ void Game::stopGameLose()
     // TODO: how to clear correctly?
     // sleep???
 
-    std::cout << "Game over" << std::endl;
+    // std::cout << "Game over" << std::endl;
 }
 
 
@@ -251,7 +251,7 @@ void Game::stopGameWin()
     // TODO: how to clear correctly?
     // sleep???
 
-    std::cout << "You win!" << std::endl;
+    // std::cout << "You win!" << std::endl;
 }
 
 
