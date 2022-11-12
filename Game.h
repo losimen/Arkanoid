@@ -38,8 +38,8 @@ private:
         RIGHT
     };
 
-    bool isLost = false;
-    bool isWon = false;
+    bool isLost;
+    bool isWon;
 
 public:
     Game(int width, int height);

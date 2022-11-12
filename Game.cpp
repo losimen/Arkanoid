@@ -129,6 +129,9 @@ Game::Game(int width, int height)
 {
     this->width = width;
     this->height = height;
+
+    isWon = false;
+    isLost = false;
 }
 
 
@@ -190,6 +193,7 @@ void Game::startGame()
 {
     mouse->setIsVisible(true);
     ball->setIsReleased(false);
+    scoreTab->setBlocksDestroyedROW(0);
     Block::setDestroyedBlocks(0);
 
     for (auto block : blocks)
@@ -233,6 +237,7 @@ void Game::playGame()
     hitType = isCollide(platform, ball);
     if (hitType != HitType::NONE)
     {
+        scoreTab->setBlocksDestroyedROW(0);
         changeBallDirection(hitType);
     }
 
@@ -248,10 +253,11 @@ void Game::playGame()
         hitType = isCollide(blocks[i], ball);
         if (hitType != HitType::NONE)
         {
+            scoreTab->addBlocksDestroyedROW(1);
             changeBallDirection(hitType);
             blocks[i]->setIsVisible(false);
-            scoreTab->addScore(10);
             blocks[i]->addDestroyedBlocks(1);
+            scoreTab->addScore(10);
         }
     }
 
