@@ -106,3 +106,21 @@ Platform::~Platform()
 {
 
 }
+
+
+void Platform::setSpeed(double speed)
+{
+    this->speed = speed;
+}
+
+
+double Platform::getSpeed()
+{
+    return speed;
+}
+
+
+void Platform::addSpeed(double speed)
+{
+    this->speed += speed;
+}

@@ -12,6 +12,9 @@
 #include "Block.h"
 #include "ScoreTab.h"
 #include "InfoTablo.h"
+#include "Abilities.h"
+
+#include <random>
 
 
 class Game : public Framework
@@ -25,6 +28,16 @@ private:
 
     InfoTablo *winTab;
     InfoTablo *loseTab;
+
+    // TODO: abilities random generator
+    Abilities *ability50;
+    Abilities *ability100;
+    Abilities *ability250;
+    Abilities *ability500;
+    Abilities *abilitySlow;
+    Abilities *abilityFast;
+
+    std::vector<Abilities*> abilitiesOnScreen;
 
     int width;
     int height;
@@ -41,6 +54,16 @@ private:
     bool isLost;
     bool isWon;
 
+    Abilities *getRandomAbility();
+
+    void startGame();
+    void stopGameLose();
+    void stopGameWin();
+    void playGame();
+
+    HitType isCollide(IObject *a, IObject *b, unsigned int paddingB = 0);
+    void changeBallDirection(HitType hitType);
+
 public:
     Game(int width, int height);
 
@@ -55,15 +78,6 @@ public:
 
     void onKeyPressed(FRKey k) override;
     void onKeyReleased(FRKey k) override;
-
-    void startGame();
-    void stopGameLose();
-    void stopGameWin();
-
-    void playGame();
-
-    HitType isCollide(IObject *a, IObject *b, unsigned int paddingB = 0);
-    void changeBallDirection(HitType hitType);
 
     const char* GetTitle() override;
 };

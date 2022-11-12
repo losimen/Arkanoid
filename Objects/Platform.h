@@ -39,6 +39,10 @@ public:
 
     void onKeyPressed(FRKey k);
     void onKeyReleased(FRKey k);
+
+    void setSpeed(double speed);
+    double getSpeed();
+    void addSpeed(double speed);
 };
 
 

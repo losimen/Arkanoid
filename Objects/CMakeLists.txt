@@ -12,6 +12,8 @@ list(APPEND myApp_SOURCES ${CMAKE_CURRENT_LIST_DIR}/Block.cpp
                           ${CMAKE_CURRENT_LIST_DIR}/ScoreTab.cpp
                           ${CMAKE_CURRENT_LIST_DIR}/InfoTablo.h
                           ${CMAKE_CURRENT_LIST_DIR}/InfoTablo.cpp
+                          ${CMAKE_CURRENT_LIST_DIR}/Abilities.h
+                          ${CMAKE_CURRENT_LIST_DIR}/Abilities.cpp
         )
 
 list(APPEND myApp_INCLUDES ${CMAKE_CURRENT_LIST_DIR})
