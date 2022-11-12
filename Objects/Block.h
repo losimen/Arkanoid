@@ -33,9 +33,13 @@ public:
     ~Block();
 
     void render() override;
+
     static void setDestroyedBlocks(int value);
     static int getDestroyedBlocks();
     static void addDestroyedBlocks(int value);
+
+    int getScore() const;
+    void setScore(int score);
 };
 
 #endif //ARKANOID_BLOCK_H

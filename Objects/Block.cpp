@@ -32,7 +32,6 @@ Block::Block(int x, int y, int width, int height, int windowWidth, int windowHei
         case BlockColor::YELLOW:
             sprite = createSprite("data/13-Breakout-Tiles.png");
             break;
-
     }
 
     setSpriteSize(sprite, width, height);
@@ -67,4 +66,14 @@ int Block::getDestroyedBlocks()
 void Block::addDestroyedBlocks(int value)
 {
     destroyedBlocks += value;
+}
+
+int Block::getScore() const
+{
+    return score;
+}
+
+void Block::setScore(int score)
+{
+    Block::score = score;
 }

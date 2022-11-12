@@ -106,15 +106,14 @@ bool Game::Init()
     winTab = new InfoTablo(width/2-250, height/2-100, 500, 200, width, height, "data/winTablo.png");
     loseTab = new InfoTablo(width/2-250, height/2-100, 500, 200, width, height, "data/loseTablo.png");
 
-
     // TODO: random blocks generator
-    blocks.push_back(new Block(0, 0, 100, 50, width, height, 1, 100, BlockColor::RED));
-    blocks.push_back(new Block(100, 0, 100, 50, width, height, 1, 100, BlockColor::RED));
-    blocks.push_back(new Block(200, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
-    blocks.push_back(new Block(300, 0, 100, 50, width, height, 1, 100, BlockColor::PURPLE));
-    blocks.push_back(new Block(400, 0, 100, 50, width, height, 1, 100, BlockColor::GREEN));
-    blocks.push_back(new Block(200, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
-    blocks.push_back(new Block(350, 200, 100, 50, width, height, 1, 100, BlockColor::YELLOW));
+    blocks.push_back(new Block(0, 0, 100, 50, width, height, 1, 10, BlockColor::RED));
+    blocks.push_back(new Block(100, 0, 100, 50, width, height, 1, 10, BlockColor::RED));
+    blocks.push_back(new Block(200, 0, 100, 50, width, height, 1, 10, BlockColor::GREEN));
+    blocks.push_back(new Block(300, 0, 100, 50, width, height, 1, 10, BlockColor::PURPLE));
+    blocks.push_back(new Block(400, 0, 100, 50, width, height, 1, 10, BlockColor::GREEN));
+    blocks.push_back(new Block(200, 200, 100, 50, width, height, 1, 10, BlockColor::YELLOW));
+    blocks.push_back(new Block(350, 200, 100, 50, width, height, 1, 10, BlockColor::YELLOW));
 
     return true;
 }
@@ -139,29 +138,30 @@ Game::Game(int width, int height)
 }
 
 
-Game::HitType Game::isCollide(IObject *a, IObject *b)
+Game::HitType Game::isCollide(IObject *a, IObject *b, unsigned int paddingB)
 {
+    // paddingB - make object bigger than it is
     static const int PADDING = 2;
 
-    if (a->getRight()-PADDING > b->getLeft() && a->getLeft()+PADDING < b->getRight())
+    if (a->getRight()-PADDING > b->getLeft() - paddingB && a->getLeft()+PADDING < b->getRight() + paddingB)
     {
-        if (a->getBottom() > b->getTop() && a->getTop() < b->getTop())
+        if (a->getBottom() > b->getTop() - paddingB && a->getTop() < b->getTop() - paddingB)
         {
             return HitType::TOP;
         }
-        else if (a->getTop() < b->getBottom() && a->getBottom() > b->getBottom())
+        else if (a->getTop() < b->getBottom() + paddingB && a->getBottom() > b->getBottom() + paddingB)
         {
             return HitType::BOTTOM;
         }
     }
 
-    else if (a->getBottom() > b->getTop() && a->getTop() < b->getBottom())
+    else if (a->getBottom() > b->getTop() - paddingB && a->getTop() < b->getBottom() + paddingB)
     {
-        if (a->getRight() > b->getLeft() && a->getLeft() < b->getLeft())
+        if (a->getRight() > b->getLeft() - paddingB && a->getLeft() < b->getLeft() - paddingB)
         {
             return HitType::LEFT;
         }
-        else if (a->getLeft() < b->getRight() && a->getRight() > b->getRight())
+        else if (a->getLeft() < b->getRight() + paddingB && a->getRight() > b->getRight() + paddingB)
         {
             return HitType::RIGHT;
         }
@@ -264,7 +264,7 @@ void Game::playGame()
             changeBallDirection(hitType);
             blocks[i]->setIsVisible(false);
             blocks[i]->addDestroyedBlocks(1);
-            scoreTab->addScore(10);
+            scoreTab->addScore(blocks[i]->getScore());
         }
     }
 

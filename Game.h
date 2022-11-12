@@ -62,7 +62,7 @@ public:
 
     void playGame();
 
-    HitType isCollide(IObject *a, IObject *b);
+    HitType isCollide(IObject *a, IObject *b, unsigned int paddingB = 0);
     void changeBallDirection(HitType hitType);
 
     const char* GetTitle() override;
