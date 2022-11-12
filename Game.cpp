@@ -401,14 +401,14 @@ void Game::isCollidePlatformWithAbilities()
             {
                 if (platform->getSpeed() > 1)
                 {
-                    platform->setSpeed(platform->getSpeed() - 5);
+                    platform->setSpeed(platform->getSpeed() - 2);
                 }
             }
             else if (abilitiesOnScreen[i]->getType() == AbilitiesType::FAST_PLATFORM)
             {
                 if (platform->getSpeed() < 10)
                 {
-                    platform->setSpeed(platform->getSpeed() + 5);
+                    platform->setSpeed(platform->getSpeed() + 1);
                 }
             }
 
