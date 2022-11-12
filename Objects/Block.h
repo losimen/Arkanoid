@@ -23,6 +23,7 @@ class Block: public IObject
 {
 private:
     static int destroyedBlocks;
+    BlockColor color;
 
     BlockColor blockColor;
     int health;
@@ -37,6 +38,8 @@ public:
     static void setDestroyedBlocks(int value);
     static int getDestroyedBlocks();
     static void addDestroyedBlocks(int value);
+
+    bool isOrange();
 
     int getScore() const;
     void setScore(int score);

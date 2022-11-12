@@ -110,6 +110,7 @@ bool Game::Init()
     blocks.push_back(new Block(0, 0, 100, 50, width, height, 1, 10, BlockColor::RED));
     blocks.push_back(new Block(100, 0, 100, 50, width, height, 1, 10, BlockColor::RED));
     blocks.push_back(new Block(200, 0, 100, 50, width, height, 1, 10, BlockColor::GREEN));
+    blocks.push_back(new Block(200, 50, 100, 50, width, height, 1, 10, BlockColor::ORANGE));
     blocks.push_back(new Block(300, 0, 100, 50, width, height, 1, 10, BlockColor::PURPLE));
     blocks.push_back(new Block(400, 0, 100, 50, width, height, 1, 10, BlockColor::GREEN));
     blocks.push_back(new Block(200, 200, 100, 50, width, height, 1, 10, BlockColor::YELLOW));
@@ -260,11 +261,28 @@ void Game::playGame()
         hitType = isCollide(blocks[i], ball);
         if (hitType != HitType::NONE)
         {
-            scoreTab->addBlocksDestroyedROW(1);
             changeBallDirection(hitType);
+
             blocks[i]->setIsVisible(false);
             blocks[i]->addDestroyedBlocks(1);
+            scoreTab->addBlocksDestroyedROW(1);
             scoreTab->addScore(blocks[i]->getScore());
+
+            // simulate BOOM effect
+            if (blocks[i]->isOrange())
+            {
+                for (int j = 0; j < blocks.size(); j++)
+                {
+                    hitType = isCollide(blocks[j], blocks[i], 10);
+                    if (hitType != HitType::NONE)
+                    {
+                        blocks[j]->setIsVisible(false);
+                        blocks[j]->addDestroyedBlocks(1);
+                        scoreTab->addBlocksDestroyedROW(1);
+                        scoreTab->addScore(blocks[j]->getScore());
+                    }
+                }
+            }
         }
     }
 

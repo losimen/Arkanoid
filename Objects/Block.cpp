@@ -11,8 +11,9 @@ Block::Block(int x, int y, int width, int height, int windowWidth, int windowHei
 {
     this->health = health;
     this->score = score;
+    this->color = color;
 
-    switch (color)
+    switch (this->color)
     {
         case BlockColor::BLUE:
             sprite = createSprite("data/01-Breakout-Tiles.png");
@@ -76,4 +77,9 @@ int Block::getScore() const
 void Block::setScore(int score)
 {
     Block::score = score;
+}
+
+bool Block::isOrange()
+{
+    return this->color == BlockColor::ORANGE;
 }
