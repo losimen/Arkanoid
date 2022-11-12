@@ -255,34 +255,78 @@ void Game::stopGameWin()
 
 void Game::playGame()
 {
+    platform->render();
+    ball->render();
+    scoreTab->render();
 
-    HitType hitType;
-    Abilities *ability = getRandomAbility();
+    spawnAbility();
 
-    if (ability != nullptr)
+    isCollidePlatformWithAbilities();
+    isCollideBallWithPlatform();
+    isCollideBallWithBlocks();
+
+    isEndGame();
+
+    for (auto block : blocks)
     {
-        if (!ability->getIsVisible())
-        {
-            ability->setIsVisible(true);
-            ability->setX(std::rand() % ( width - 1 + 1 ));
-            ability->setY(0);
-            abilitiesOnScreen.push_back(ability);
-        }
+        block->render();
     }
 
-    // collision with platform
+    for (auto ability : abilitiesOnScreen)
+    {
+        ability->render();
+    }
+
+    if (!ball->getIsReleased())
+    {
+        ball->setPlatformPosition(platform->getX(), platform->getY());
+        ball->setPlatformSize(platform->getWidth(), platform->getHeight());
+        mouse->render();
+    }
+}
+
+
+Abilities *Game::getRandomAbility()
+{
+    int num = std::rand() % ( 20000 - 0 + 1 );
+
+    switch (num)
+    {
+        case 0:
+            return ability50;
+        case 1:
+            return ability100;
+        case 2:
+            return ability250;
+        case 3:
+            return ability500;
+        case 4:
+            return abilitySlow;
+        case 5:
+            return abilityFast;
+        default:
+            return nullptr;
+    }
+}
+
+
+void Game::isCollideBallWithPlatform()
+{
+    HitType hitType;
     hitType = isCollide(platform, ball);
+
     if (hitType != HitType::NONE)
     {
         scoreTab->setBlocksDestroyedROW(0);
         changeBallDirection(hitType);
     }
+}
 
-    platform->render();
-    ball->render();
-    scoreTab->render();
 
-    // collision with blocks
+void Game::isCollideBallWithBlocks()
+{
+    HitType hitType;
+
     for (int i = 0; i < blocks.size(); i++)
     {
         if (!blocks[i]->getIsVisible())
@@ -315,32 +359,11 @@ void Game::playGame()
             }
         }
     }
+}
 
-    for (auto block : blocks)
-    {
-        block->render();
-    }
 
-    for (auto elem : abilitiesOnScreen)
-    {
-        elem->render();
-    }
-
-    if (!ball->getIsReleased())
-    {
-        ball->setPlatformPosition(platform->getX(), platform->getY());
-        ball->setPlatformSize(platform->getWidth(), platform->getHeight());
-        mouse->render();
-    }
-
-    // is ball out of screen?
-    if (ball->getY() > height-50)
-    {
-        isLost = true;
-        stopGameLose();
-    }
-
-    // collision with abilities
+void Game::isCollidePlatformWithAbilities()
+{
     for (int i = 0; i < abilitiesOnScreen.size(); i++)
     {
         if (abilitiesOnScreen[i]->getY() > height-50)
@@ -388,6 +411,33 @@ void Game::playGame()
             abilitiesOnScreen.erase(abilitiesOnScreen.begin() + i);
         }
     }
+}
+
+
+void Game::spawnAbility()
+{
+    Abilities *ability = getRandomAbility();
+
+    if (ability != nullptr)
+    {
+        if (!ability->getIsVisible())
+        {
+            ability->setIsVisible(true);
+            ability->setX(std::rand() % ( width - 1 + 1 ));
+            ability->setY(0);
+            abilitiesOnScreen.push_back(ability);
+        }
+    }
+}
+
+
+void Game::isEndGame()
+{
+    if (ball->getY() > height-50)
+    {
+        isLost = true;
+        stopGameLose();
+    }
 
     if (blocks.size() == Block::getDestroyedBlocks())
     {
@@ -395,28 +445,3 @@ void Game::playGame()
         stopGameWin();
     }
 }
-
-
-Abilities *Game::getRandomAbility()
-{
-    int num = std::rand() % ( 20 - 0 + 1 );
-
-    switch (num)
-    {
-        case 0:
-            return ability50;
-        case 1:
-            return ability100;
-        case 2:
-            return ability250;
-        case 3:
-            return ability500;
-        case 4:
-            return abilitySlow;
-        case 5:
-            return abilityFast;
-        default:
-            return nullptr;
-    }
-}
-

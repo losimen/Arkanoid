@@ -61,6 +61,12 @@ private:
     void stopGameWin();
     void playGame();
 
+    void isCollideBallWithPlatform();
+    void isCollideBallWithBlocks();
+    void isCollidePlatformWithAbilities();
+    void isEndGame();
+    void spawnAbility();
+
     HitType isCollide(IObject *a, IObject *b, unsigned int paddingB = 0);
     void changeBallDirection(HitType hitType);
 
