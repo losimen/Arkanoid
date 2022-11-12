@@ -16,7 +16,12 @@ protected:
 
     double x;
     double y;
+public:
+    void setX(double x);
 
+    void setY(double y);
+
+protected:
     int width;
     int height;
 

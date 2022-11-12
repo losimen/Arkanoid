@@ -79,12 +79,26 @@ int IObject::getRight() const
     return x+width;
 }
 
+
 bool IObject::getIsVisible() const
 {
     return isVisible;
 }
 
+
 void IObject::setIsVisible(bool isVisible)
 {
     this->isVisible = isVisible;
+}
+
+
+void IObject::setX(double x)
+{
+    IObject::x = x;
+}
+
+
+void IObject::setY(double y)
+{
+    IObject::y = y;
 }
