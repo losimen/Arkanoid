@@ -14,6 +14,7 @@ private:
     // each index is decimal number from 0 to 9
     std::array<Sprite*, 10> spritesNum;
     // when user destroys 3 blocks in a row, he gets x3 bonus
+    std::array<Sprite*, 10> spritesNumBonus;
 
     int score = 0;
     int blocksDestroyedROW;

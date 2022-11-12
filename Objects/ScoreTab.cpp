@@ -18,6 +18,11 @@ ScoreTab::ScoreTab(int x, int y, int width, int height, int windowWidth, int win
         setSpriteSize(spritesNum[i], 40, 40);
     }
 
+    for (int i = 0; i < 10; i++)
+    {
+        spritesNumBonus[i] = createSprite(std::string("data/numS_" + std::to_string(i) + ".png").c_str());
+        setSpriteSize(spritesNumBonus[i], 40, 40);
+    }
 
 }
 
@@ -47,7 +52,14 @@ void ScoreTab::render()
     std::reverse(nums.begin(), nums.end());
     for (int i = nums.size() - 1; i >= 0; i--)
     {
-        drawSprite(spritesNum[nums[i]], 600 + space, y);
+        if (blocksDestroyedROW >= 3)
+        {
+            drawSprite(spritesNumBonus[nums[i]], 600 + space, y);
+        }
+        else
+        {
+            drawSprite(spritesNum[nums[i]], 600 + space, y);
+        }
         space -= 40;
     }
 }

@@ -137,7 +137,9 @@ Game::Game(int width, int height)
 
 Game::HitType Game::isCollide(IObject *a, IObject *b)
 {
-    if (a->getRight()-2 > b->getLeft() && a->getLeft()+2 < b->getRight())
+    static const int PADDING = 2;
+
+    if (a->getRight()-PADDING > b->getLeft() && a->getLeft()+PADDING < b->getRight())
     {
         if (a->getBottom() > b->getTop() && a->getTop() < b->getTop())
         {
