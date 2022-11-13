@@ -23,7 +23,7 @@ class Abilities : public IObject
 {
 private:
     AbilitiesType type;
-    int speed;
+    double speed;
 
 public:
     Abilities(int x, int y, int width, int height, int windowWidth, int windowHeight, AbilitiesType type);

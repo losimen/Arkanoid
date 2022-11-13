@@ -30,14 +30,16 @@ Abilities::Abilities(int x, int y, int width, int height, int windowWidth, int w
     }
 
     setSpriteSize(sprite, width, height);
-    speed = 3;
+    speed = 0.3;
 }
 
 
 void Abilities::render(unsigned int timeDelta)
 {
-    y = y + 0.3;
+    if (!isVisible)
+        return;
 
+    y = y + speed;
     drawSprite(sprite, x, y);
 }
 

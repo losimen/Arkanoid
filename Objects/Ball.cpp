@@ -37,6 +37,7 @@ void Ball::render(unsigned int timeDelta)
     }
     else
     {
+        // put in the top middle of platform
         x = (platformX + (platformWidth-width) / 2);
         y = (platformY - height)-5;
     }
@@ -134,11 +135,11 @@ void Ball::setBallDestination(int x, int y)
 
 
      New algorithm:
-          Description soon...
+          look up in file INFO/Ball.pdf
     */
     dirY = 1;
     dirX = 1;
-    // TODO: add description
+
     double xMouse = x;
     double yMouse = y;
 

@@ -66,7 +66,7 @@ void Game::onMouseMove(int x, int y, int xRelative, int yRelative)
 
 bool Game::Tick()
 {
-    // TODO: use tick for object movement
+    // TODO: use tick for object movement ???
     tickStart = getTickCount();
     drawTestBackground();
 
@@ -159,26 +159,33 @@ Game::Game(int width, int height)
 Game::HitType Game::isCollide(IObject *a, IObject *b, unsigned int paddingB)
 {
     // paddingB - make object bigger than it is
+    // PADDING - make object smaller than it is (for more accurate collision)
     static const int PADDING = 2;
 
+    // if object "b" between left and right sides of "a" object
     if (a->getRight()-PADDING > b->getLeft() - paddingB && a->getLeft()+PADDING < b->getRight() + paddingB)
     {
+        // if object "b" is on top of "a" object
         if (a->getBottom() > b->getTop() - paddingB && a->getTop() < b->getTop() - paddingB)
         {
             return HitType::TOP;
         }
+        // if object "b" is on bottom of "a" object
         else if (a->getTop() < b->getBottom() + paddingB && a->getBottom() > b->getBottom() + paddingB)
         {
             return HitType::BOTTOM;
         }
     }
 
+    // if object "b" between bottom and top sides of "a" object
     else if (a->getBottom() > b->getTop() - paddingB && a->getTop() < b->getBottom() + paddingB)
     {
+        // if object "b" is on left side of "a" object
         if (a->getRight() > b->getLeft() - paddingB && a->getLeft() < b->getLeft() - paddingB)
         {
             return HitType::LEFT;
         }
+        // if object "b" is on right side of "a" object
         else if (a->getLeft() < b->getRight() + paddingB && a->getRight() > b->getRight() + paddingB)
         {
             return HitType::RIGHT;
