@@ -27,4 +27,5 @@ All formulas and algorithms are described in the INFO folder. Also, there are de
 6. Run `cmake.` and then `make`
 7. Go to the root of the repository
 8. Run `cmake .` and then `make`
-9. Voilà! You have the game!
+9. `./Arkanoid` or you can specify screen width and height `./Arkanoid 800 600`
+10. Voilà! You have the game!
