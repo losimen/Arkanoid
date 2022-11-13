@@ -4,8 +4,6 @@ project(Arkanoid)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_subdirectory(Framework)
-
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 
