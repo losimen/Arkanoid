@@ -1,5 +1,6 @@
 # Arkanoid
 My the first game ever written :D.
+
 ![](https://media.giphy.com/media/13QyATkrHD39nebXIB/giphy.gif)
 
 # Description
