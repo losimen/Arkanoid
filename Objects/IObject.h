@@ -31,7 +31,7 @@ protected:
     bool isVisible;
 public:
     IObject(int x, int y, int width, int height, int windowWidth, int windowHeight);
-    ~IObject();
+    virtual ~IObject();
 
     virtual void render(unsigned int timeDelta) = 0;
 

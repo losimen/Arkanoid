@@ -32,7 +32,7 @@ public:
 
     AbilitiesType getType() const;
 
-    ~Abilities();
+    virtual ~Abilities();
 };
 
 

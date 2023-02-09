@@ -43,7 +43,7 @@ private:
 
 public:
     Ball(int x, int y, int width, int height, int speed, int direction);
-    ~Ball();
+    ~Ball() override;
 
     void setPlatformPosition(int x, int y);
     void setPlatformSize(int width, int height);

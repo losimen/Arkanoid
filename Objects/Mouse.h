@@ -12,7 +12,7 @@ class Mouse: public IObject
 {
 public:
     Mouse(int x, int y, int width, int height, int windowWidth, int windowHeight);
-    ~Mouse();
+    ~Mouse() override;
 
     void render(unsigned int timeDelta) override;
     void onMouseMove(int x, int y, int xRelative, int yRelative);

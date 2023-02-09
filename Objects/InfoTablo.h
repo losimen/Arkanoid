@@ -12,7 +12,7 @@ class InfoTablo: public IObject
 {
 public:
     InfoTablo(int x, int y, int width, int height, int windowWidth, int windowHeight, const char *path);
-    ~InfoTablo();
+    ~InfoTablo() override;
 
     void render(unsigned int timeDelta) override;
 };

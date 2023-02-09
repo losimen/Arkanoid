@@ -33,7 +33,7 @@ private:
 
 public:
     Platform(int x, int y, int width, int height, int windowWidth, int windowHeight);
-    ~Platform();
+    ~Platform() override;
 
     void render(unsigned int tickDelta) override;
 

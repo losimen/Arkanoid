@@ -31,7 +31,7 @@ private:
 
 public:
     Block(int x, int y, int width, int height, int windowWidth, int windowHeight, int health, int score, BlockColor color);
-    ~Block();
+    ~Block() override;
 
     void render(unsigned int timeDelta) override;
 
